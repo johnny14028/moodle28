@@ -1,6 +1,5 @@
 <?php
 require_once(__DIR__.'/../base/RequestRegistry.php');
-//require_once ('mvc/base/RequestRegistry.php');
 
 class mvc_controller_Request {
 

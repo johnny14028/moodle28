@@ -1,6 +1,4 @@
 <?php
-
-//include_once 'mvc/require/autoload.php';
 include('../../config.php');
 require_once('mvc/controller/Controller.php');
 
