@@ -57,7 +57,7 @@ class generador {
                 echo $this->color->getColoredString('Ingrese los parametros completos', 'white', 'red');
             }
         } else {
-            echo $this->color->getColoredString($this->presentation(), 'blue');
+            echo $this->presentation();
         }
     }
 
@@ -70,11 +70,26 @@ class generador {
     }
 
     private function presentation() {
-        $returnValue = '';
-        $returnValue.='█▀▀█ █░░█ █▀▀ █▀▀█ ░░ █▀▀▀ █▀▀ █▀▀▄ █▀▀ █▀▀█ █▀▀█ ▀▀█▀▀ █▀▀█ █▀▀█ 
-█░░█ █░░█ █░░ █░░█ ▀▀ █░▀█ █▀▀ █░░█ █▀▀ █▄▄▀ █▄▄█ ░░█░░ █░░█ █▄▄▀ 
-█▀▀▀ ░▀▀▀ ▀▀▀ █▀▀▀ ░░ ▀▀▀▀ ▀▀▀ ▀░░▀ ▀▀▀ ▀░▀▀ ▀░░▀ ░░▀░░ ▀▀▀▀ ▀░▀▀ ';
+        $returnValue = "\n";
+	$returnValue.= $this->color->getColoredString('-------------------------------------------------------------', 'blue');	
+        $returnValue.= $this->color->getColoredString("  __  __                       _   _                                               
+ |  \/  |   ___     ___     __| | | |   ___               _ __ ___   __   __   ___ 
+ | |\/| |  / _ \   / _ \   / _` | | |  / _ \    _____    | '_ ` _ \  \ \ / /  / __|
+ | |  | | | (_) | | (_) | | (_| | | | |  __/   |_____|   | | | | | |  \ V /  | (__ 
+ |_|  |_|  \___/   \___/   \__,_| |_|  \___|             |_| |_| |_|   \_/    \___|
+", 'blue');
         $returnValue.="\n";
+        $returnValue.=$this->color->getColoredString("                                                                  _  
+      _   ._   _  o   _   ._      _.  |  ._   |_    _.    /|     / \ 
+ \/  (/_  |   _>  |  (_)  | |    (_|  |  |_)  | |  (_|     |  o  \_/ 
+", 'blue');
+        $returnValue.="\n";
+	$returnValue.= $this->color->getColoredString('-------------------------------------------------------------', 'blue');	
+        $returnValue.="\n";
+$returnValue.= $this->color->getColoredString("generate type nombreplugin \n", 'green');
+$returnValue.= $this->color->getColoredString("generate: \t comando para indicar el inicio del evento", 'green');
+$returnValue.= $this->color->getColoredString("type: \t\t local, report, activity, format, repository", 'green');
+$returnValue.= $this->color->getColoredString("nombreplugin: \t nombre del plugin a generar", 'green');
         return $returnValue;
     }
 
