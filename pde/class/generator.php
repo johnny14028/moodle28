@@ -9,7 +9,7 @@ class generador {
 
     private $color;
     private $generate = 'generate';
-    private $type = array('local');
+    private $type = array('local', 'controller');
     public $local;
     public $report;
     public $module;
@@ -41,7 +41,11 @@ class generador {
                                 case 'local':
                                     $this->local->run($param[3]);
                                     break;
+                                case 'controller':
+                                    $this->generateController($param);
+                                    break;
                                 default:
+                                    echo $this->color->getColoredString('El comando no puede generar el tipo ingresado', 'white', 'red');
                                     break;
                             }
                         }else{
@@ -58,6 +62,18 @@ class generador {
             }
         } else {
             echo $this->presentation();
+        }
+    }
+    
+    private function generateController($param){
+        if(is_array($param) && count($param)>0){
+            //verificamos que al menos tenga 5 parametros
+            if(count($param)== 5){
+                //validamos que el plugin exista y que tenga la estructura mvc
+                
+            }else{
+                echo $this->color->getColoredString('Ingrese los parametros correctos', 'white', 'red');
+            }
         }
     }
 
@@ -88,7 +104,7 @@ class generador {
         $returnValue.="\n";
 $returnValue.= $this->color->getColoredString("generate type nombreplugin \n", 'green');
 $returnValue.= $this->color->getColoredString("generate: \t comando para indicar el inicio del evento", 'green');
-$returnValue.= $this->color->getColoredString("type: \t\t local, report, activity, format, repository", 'green');
+$returnValue.= $this->color->getColoredString("type: \t\t local, report, activity, format, repository, controller", 'green');
 $returnValue.= $this->color->getColoredString("nombreplugin: \t nombre del plugin a generar", 'green');
         return $returnValue;
     }

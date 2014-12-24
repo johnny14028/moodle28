@@ -67,14 +67,15 @@ class pde_local {
         array_push($returnValue, $pathPackage . '/mvc/command/Command.php');
         array_push($returnValue, $pathPackage . '/mvc/command/CommandResolver.php');
         array_push($returnValue, $pathPackage . '/mvc/command/DefaultCommand.php');
-        array_push($returnValue, $pathPackage . '/mvc/base/Controller.php');
-        array_push($returnValue, $pathPackage . '/mvc/base/Request.php');
-        array_push($returnValue, $pathPackage . '/mvc/base/Session.php');
+        array_push($returnValue, $pathPackage . '/mvc/controller/Controller.php');
+        array_push($returnValue, $pathPackage . '/mvc/controller/Request.php');
+        array_push($returnValue, $pathPackage . '/mvc/controller/Session.php');
         array_push($returnValue, $pathPackage . '/mvc/require/autoload.php');
         array_push($returnValue, $pathPackage . '/mvc/views/error.php');
         array_push($returnValue, $pathPackage . '/mvc/views/header.php');
         array_push($returnValue, $pathPackage . '/mvc/views/footer.php');
         array_push($returnValue, $pathPackage . '/views/Default/index.php');
+        array_push($returnValue, $pathPackage . '/model/Model.php');
         return $returnValue;
     }
 
@@ -163,10 +164,22 @@ $plugin->component = \'local_' . $name . '\';';
             case $pathPackage . '/controllers/DefaultController.php':
                 $returnValue = '<?php
 require_once(__DIR__.\'/../mvc/command/Command.php\');
+require_once(__DIR__.\'/../model/Model.php\');
 class DefaultController extends mvc_command_Command{
+    private $model;
+    
+    public function __construct() {
+        $this->model = new Model();
+    }
     
     public function index(){
-        
+        global $USER;
+        $objUsuario = $this->model->getUser();
+        return array(
+            \'usuario\'=>$USER->firstname,
+            \'name_plugin\'=>  get_string(\'pluginname\', \'local_' . $name . '\'),
+            \'objUsuario\'=> $objUsuario
+            );        
     }
 }';
                 break;
@@ -237,7 +250,11 @@ $capabilities = array(
 </XMLDB>';
                 break;
             case $pathPackage . '/views/Default/index.php':
-                $returnValue = '<h1>Bienvenido al plugin local ' . $name . ' con el action index</h1>';
+                $returnValue = '<h1>Bievenido <?php echo $usuario ?> al <?php echo $name_plugin ?></h1>
+
+<?php
+print_object($objUsuario);
+?> ';
                 break;
             case $pathPackage . '/mvc/base/Registry.php':
                 $returnValue = '<?php
@@ -379,8 +396,8 @@ abstract class mvc_command_Command {
         if (!$func)
             $func = \'index\';
 
-        $func = str_replace(array(\'.\', \'/\', \'\\\'), \'\', $func);
-        $cmd = str_replace(array(\'.\', \'/\', \'\\\'), \'\', $cmd);
+        $func = str_replace(array(\'.\', \'/\', \'\\\\\'), \'\', $func);
+        $cmd = str_replace(array(\'.\', \'/\', \'\\\\\'), \'\', $cmd);
         $this->queryString = "cmd=$cmd&action=$func";
         $this->fileViewDefault = "views/{$cmd}/index.php";
         $fileView2 = "views/{$cmd}/$func.php";
@@ -487,8 +504,8 @@ class mvc_command_CommandResolver {
             $cmd = \'Default\';
         if (!$func)
             $func = \'Index\';
-        $cmd = str_replace(array(\'.\', \'/\', \'\\\'), \'\', $cmd);
-        $func = str_replace(array(\'.\', \'/\', \'\\\'), \'\', $func);
+        $cmd = str_replace(array(\'.\', \'/\', \'\\\\\'), \'\', $cmd);
+        $func = str_replace(array(\'.\', \'/\', \'\\\\\'), \'\', $func);
 
 
 
@@ -664,6 +681,23 @@ class mvc_controller_Session {
         return $returnValue;
     }
 
+}';
+                break;
+            case $pathPackage . '/model/Model.php':
+                $returnValue = '<?php
+
+class Model {
+    
+    public function getUser(){
+        global $USER, $DB;
+        $returnValue = NULL;
+        $user = $DB->get_record(\'user\', array(\'id\'=>$USER->id));
+        if(is_object($user)){
+            $returnValue = $user;
+        }
+        return $returnValue;
+    }
+    
 }';
                 break;
         }
