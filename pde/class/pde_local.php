@@ -239,7 +239,7 @@ $capabilities = array(
                 <FIELD NAME="name" TYPE="char"  LENGTH="256" NOTNULL="true" SEQUENCE="false"  PREVIOUS="userid" NEXT="fullname"/>
                 <FIELD NAME="fullname" TYPE="text" NOTNULL="true" SEQUENCE="false" PREVIOUS="name" NEXT="timecreate"/>
                 <FIELD NAME="timecreate" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" DEFAULT="1" SEQUENCE="false"  PREVIOUS="fullname"  NEXT="timemodified"/>
-                <FIELD NAME="timemodified" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" DEFAULT="1" SEQUENCE="false"  PREVIOUS="timecreate"  NEXT="state" /> 
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" DEFAULT="1" SEQUENCE="false"  PREVIOUS="timecreate"  NEXT="status" /> 
                 <FIELD NAME="status" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" DEFAULT="1" SEQUENCE="false"  PREVIOUS="timemodified" />                
             </FIELDS>
             <KEYS>
@@ -248,6 +248,12 @@ $capabilities = array(
         </TABLE>
     </TABLES>
 </XMLDB>';
+                break;
+            case $pathPackage . '/db/install.php':
+                $returnValue = '<?php
+
+function xmldb_local_'.$name.'_install(){
+}';
                 break;
             case $pathPackage . '/views/Default/index.php':
                 $returnValue = '<h1>Bievenido <?php echo $usuario ?> al <?php echo $name_plugin ?></h1>
