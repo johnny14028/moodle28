@@ -35,9 +35,9 @@ class generador {
                     //validamos el segundo parametro, donde identificamos que queremos generar
                     if (isset($param[2]) && in_array($param[2], $this->type)) {
                         //verificamos si el nombre del paquete a generar es posible hacerlo
-                        if(isset($param[3]) && $this->nameValid($param[3])){
+                        if (isset($param[3]) && $this->nameValid($param[3])) {
                             //echo $this->color->getColoredString('paquete creado' . $param[3] . '', 'white', 'green');
-                            switch ($param[2]){
+                            switch ($param[2]) {
                                 case 'local':
                                     $this->local->run($param[3]);
                                     break;
@@ -48,7 +48,7 @@ class generador {
                                     echo $this->color->getColoredString('El comando no puede generar el tipo ingresado', 'white', 'red');
                                     break;
                             }
-                        }else{
+                        } else {
                             echo $this->color->getColoredString('El nombre del paquete a generar es ilegal' . $param[3] . '', 'white', 'red');
                         }
                     } else {
@@ -64,17 +64,78 @@ class generador {
             echo $this->presentation();
         }
     }
-    
-    private function generateController($param){
-        if(is_array($param) && count($param)>0){
+
+    private function generateController($param) {
+        if (is_array($param) && count($param) > 0) {
             //verificamos que al menos tenga 5 parametros
-            if(count($param)== 5){
+            if (count($param) > 5) {
                 //validamos que el plugin exista y que tenga la estructura mvc
-                
-            }else{
-                echo $this->color->getColoredString('Ingrese los parametros correctos', 'white', 'red');
+                if ($this->existe($param)) {
+                    //validamos si el plugin tiene el directorio MVC
+                    if ($this->isMVC($param)) {
+                        //echo $this->color->getColoredString('good!', 'white', 'green');
+                        //generamos el controlador
+                        switch ($param[3]) {
+                            case 'local':
+                                $value = $this->local->generateController($param);
+                                break;
+                            default:
+                                break;
+                        }
+                        if($value){
+                            echo $this->color->getColoredString('El controlador se generó satisfatoriamente', 'white', 'green');
+                        }else{
+                            echo $this->color->getColoredString('Error al crear el controlador', 'white', 'red');
+                        }
+                    } else {
+                        echo $this->color->getColoredString('El plugin ' . $param[4] . ' de tipo ' . $param[3] . ' no tiene la estructura MVC', 'white', 'red');
+                    }
+                } else {
+                    echo $this->color->getColoredString('El plugin ' . $param[4] . ' de tipo ' . $param[3] . ' no existe', 'white', 'red');
+                }
+            } else {
+                echo $this->color->getColoredString('Ingrese los parametros correctos para crear el controlador', 'white', 'red');
             }
         }
+    }
+
+    private function isMVC($param) {
+        $returnValue = FALSE;
+        $pathPlugin = '';
+        switch ($param[3]) {
+            case 'local':
+                $pathPlugin = getcwd() . '/' . $param[3] . '/' . $param[4];
+                break;
+            default:
+                break;
+        }
+        if (file_exists($pathPlugin)) {
+            //verificamos si existe la carpeta mvc, controllers, views, model
+            $folderMVC = $pathPlugin . '/mvc';
+            $folderController = $pathPlugin . '/controllers';
+            $folderViews = $pathPlugin . '/views';
+            $folderModel = $pathPlugin . '/model';
+            if (file_exists($folderController) && file_exists($folderViews) && file_exists($folderMVC) && file_exists($folderModel)) {
+                $returnValue = TRUE;
+            }
+        }
+        return $returnValue;
+    }
+
+    private function existe($param) {
+        $returnValue = FALSE;
+        $pathPlugin = '';
+        switch ($param[3]) {
+            case 'local':
+                $pathPlugin = getcwd() . '/' . $param[3] . '/' . $param[4];
+                break;
+            default:
+                break;
+        }
+        if (file_exists($pathPlugin)) {
+            $returnValue = TRUE;
+        }
+        return $returnValue;
     }
 
     private function nameValid($filename) {
@@ -87,7 +148,7 @@ class generador {
 
     private function presentation() {
         $returnValue = "\n";
-	$returnValue.= $this->color->getColoredString('-------------------------------------------------------------', 'blue');	
+        $returnValue.= $this->color->getColoredString('-------------------------------------------------------------', 'blue');
         $returnValue.= $this->color->getColoredString("  __  __                       _   _                                               
  |  \/  |   ___     ___     __| | | |   ___               _ __ ___   __   __   ___ 
  | |\/| |  / _ \   / _ \   / _` | | |  / _ \    _____    | '_ ` _ \  \ \ / /  / __|
@@ -100,12 +161,14 @@ class generador {
  \/  (/_  |   _>  |  (_)  | |    (_|  |  |_)  | |  (_|     |  o  \_/ 
 ", 'blue');
         $returnValue.="\n";
-	$returnValue.= $this->color->getColoredString('-------------------------------------------------------------', 'blue');	
+        $returnValue.= $this->color->getColoredString('-------------------------------------------------------------', 'blue');
         $returnValue.="\n";
-$returnValue.= $this->color->getColoredString("generate type nombreplugin \n", 'green');
-$returnValue.= $this->color->getColoredString("generate: \t comando para indicar el inicio del evento", 'green');
-$returnValue.= $this->color->getColoredString("type: \t\t local, report, activity, format, repository, controller", 'green');
-$returnValue.= $this->color->getColoredString("nombreplugin: \t nombre del plugin a generar", 'green');
+        $returnValue.= $this->color->getColoredString("generate type nombreplugin \n", 'green');
+        $returnValue.= $this->color->getColoredString("generate controller type nombreplugin nombrecontroller \n", 'green');
+        $returnValue.= $this->color->getColoredString("generate: \t\t comando para indicar el inicio del evento", 'green');
+        $returnValue.= $this->color->getColoredString("type: \t\t\t local, report, activity, format, repository, controller", 'green');
+        $returnValue.= $this->color->getColoredString("nombreplugin: \t\t nombre del plugin a generar", 'green');
+        $returnValue.= $this->color->getColoredString("nombrecontroller: \t nombre controlador del plugin generado", 'green');
         return $returnValue;
     }
 

@@ -19,6 +19,7 @@ class pde_local {
             //verificamos que no exista un paquete con el mismo nombre
             if (!$this->existPackage($this->path, $name)) {
                 $this->createPackage($this->path . $name, $name);
+                echo $this->color->getColoredString('El paquete fue creado en forma satisfactoria: ' . $this->path . '', 'white', 'green');
             } else {
                 echo $this->color->getColoredString('El nombre del paquete ya existe en la ruta ' . $this->path . '', 'white', 'red');
             }
@@ -110,8 +111,16 @@ class pde_local {
         }
         return $returnValue;
     }
-
-    private function getContentFile($pathPackage, $file, $name) {
+    /**
+     * 
+     * @param type $pathPackage ruta del plugin
+     * @param type $file ruta completa del archivo
+     * @param type $name nombre del plugin
+     * @param type $default si es controlador o vista
+     * @param type $nameC nombre del controlador o vista
+     * @return string
+     */
+    private function getContentFile($pathPackage, $file, $name, $default='', $nameC='') {
         $returnValue = '';
         switch ($file) {
             case $pathPackage . '/index.php':
@@ -559,7 +568,7 @@ class mvc_command_DefaultCommand extends mvc_command_Command
     }
 }';
                 break;
-            case  $pathPackage . '/mvc/base/Controller.php':
+            case  $pathPackage . '/mvc/controller/Controller.php':
                 $returnValue = '<?php
 
 require_once(\'Request.php\');
@@ -587,7 +596,7 @@ class mvc_controller_Controller {
 
 }';
                 break;
-            case $pathPackage . '/mvc/base/Request.php':
+            case $pathPackage . '/mvc/controller/Request.php':
                 $returnValue = '<?php
 require_once(__DIR__.\'/../base/RequestRegistry.php\');
 
@@ -632,7 +641,7 @@ class mvc_controller_Request {
 
 }';
                 break;
-            case $pathPackage . '/mvc/base/Session.php':
+            case $pathPackage . '/mvc/controller/Session.php':
                 $returnValue = '<?php
 
 require_once \'mvc/base/SessionRegistry.php\';
@@ -706,8 +715,70 @@ class Model {
     
 }';
                 break;
+            default:
+                    if($default=='controller'){
+                $returnValue = '<?php
+require_once(__DIR__.\'/../mvc/command/Command.php\');
+require_once(__DIR__.\'/../model/Model.php\');
+class '.ucwords(strtolower($nameC)).'Controller extends mvc_command_Command{
+    private $model;
+    
+    public function __construct() {
+        $this->model = new Model();
+    }
+    
+    public function index(){
+        global $USER;
+        $objUsuario = $this->model->getUser();
+        return array(
+            \'usuario\'=>$USER->firstname,
+            \'controlador\'=>\''.ucwords(strtolower($nameC)).'\',
+            \'name_plugin\'=>  get_string(\'pluginname\', \'local_' . $name . '\'),
+            \'objUsuario\'=> $objUsuario
+            );        
+    }
+}';                        
+                    }else{
+                       if($default=='view'){ 
+$returnValue = '<h1>Bievenido <?php echo $usuario ?> al controlador <?php echo $controlador ?> del plugin <?php echo $name_plugin ?></h1>
+
+<?php
+print_object($objUsuario);
+?> ';                  
+                    }
+                    }
+                break;
         }
 
+        return $returnValue;
+    }
+    
+    public function generateController($param){
+        $returnValue = FALSE;
+        umask(0);
+        $pathPlugin = getcwd().'/'.$param[3].'/'.$param[4].'/controllers/';
+        $pathPluginView = getcwd().'/'.$param[3].'/'.$param[4].'/views/';
+        if(file_exists($pathPlugin)){
+            //verificamos si el controlador ya existe
+            $file = $pathPlugin.ucwords(strtolower($param[5])).'Controller.php';
+            $folderView = $pathPluginView. ucwords(strtolower($param[5])).'/';
+            $fileView = $pathPluginView.ucwords(strtolower($param[5])).'/index.php';
+            if(!file_exists($file) && !file_exists($folderView) && !file_exists($fileView)){
+                //creamos el archivo controladora
+                $myfile = fopen($file, "w") or die("Unable to open file!");
+                $txt = $this->getContentFile($pathPlugin, $file, $param[4], 'controller', $param[5]);
+                fwrite($myfile, $txt);
+                fclose($myfile);
+                //creamos su vista index por defecto
+                mkdir($folderView);
+                //creamos el archivo de la vista del nuevo controlador
+                $myfileView = fopen($fileView, "w") or die("Unable to open file!");
+                $txtView = $this->getContentFile($pathPlugin, $fileView, $param[4], 'view', $param[5]);
+                fwrite($myfileView, $txtView);
+                fclose($myfileView);
+                $returnValue = TRUE;
+            }
+        }
         return $returnValue;
     }
 
