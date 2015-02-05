@@ -37,16 +37,43 @@ class pde_module {
                 mkdir($path);
             }
         }
-        $files = $this->listFile($pathPackage, $name);
-        if (is_array($files) && count($files) > 0) {
-            foreach ($files as $indice => $file) {
-                $myfile = fopen($file, "w") or die("Unable to open file!");
-                $txt = $this->getContentFile($pathPackage, $file, $name);
-                fwrite($myfile, $txt);
-                fclose($myfile);
-            }
-        }
+//        $files = $this->listFile($pathPackage, $name);
+//        if (is_array($files) && count($files) > 0) {
+//            foreach ($files as $indice => $file) {
+//                $myfile = fopen($file, "w") or die("Unable to open file!");
+//                $txt = $this->getContentFile($pathPackage, $file, $name);
+//                fwrite($myfile, $txt);
+//                fclose($myfile);
+//            }
+//        }
     }
+    
+    private function listFolder($pathPackage) {
+        $returnValue = array();
+        array_push($returnValue, $pathPackage);
+        array_push($returnValue, $pathPackage . '/backup');
+        array_push($returnValue, $pathPackage . '/backup/moodle2');
+        array_push($returnValue, $pathPackage . '/classes');
+        array_push($returnValue, $pathPackage . '/classes/event');
+        array_push($returnValue, $pathPackage . '/controllers');
+        array_push($returnValue, $pathPackage . '/db');
+        array_push($returnValue, $pathPackage . '/js');
+        array_push($returnValue, $pathPackage . '/css');
+        array_push($returnValue, $pathPackage . '/pix');
+        array_push($returnValue, $pathPackage . '/lang');
+        array_push($returnValue, $pathPackage . '/lang/en');
+        array_push($returnValue, $pathPackage . '/lang/es');
+        array_push($returnValue, $pathPackage . '/mvc');
+        array_push($returnValue, $pathPackage . '/mvc/base');
+        array_push($returnValue, $pathPackage . '/mvc/command');
+        array_push($returnValue, $pathPackage . '/mvc/controller');
+        array_push($returnValue, $pathPackage . '/mvc/require');
+        array_push($returnValue, $pathPackage . '/mvc/views');
+        array_push($returnValue, $pathPackage . '/views');
+        array_push($returnValue, $pathPackage . '/views/Default');
+        array_push($returnValue, $pathPackage . '/model');
+        return $returnValue;
+    }    
 
     public function existPackage($path, $package) {
         $returnValue = FALSE;
