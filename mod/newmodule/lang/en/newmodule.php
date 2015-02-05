@@ -37,3 +37,4 @@ $string['newmodulename_help'] = 'This is the content of the help tooltip associa
 $string['newmodule'] = 'newmodule';
 $string['pluginadministration'] = 'newmodule administration';
 $string['pluginname'] = 'newmodule';
+$string['nonewmodules'] = 'Not found this module in mod directory';
