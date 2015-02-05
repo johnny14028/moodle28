@@ -82,6 +82,9 @@ class generador {
                             case 'local':
                                 $value = $this->local->generateController($param);
                                 break;
+                            case 'activity':
+                                $value = $this->module->generateController($param);
+                                break;
                             default:
                                 break;
                         }
@@ -109,6 +112,9 @@ class generador {
             case 'local':
                 $pathPlugin = getcwd() . '/' . $param[3] . '/' . $param[4];
                 break;
+            case 'activity':
+                $pathPlugin = getcwd() . '/mod/' . $param[4];
+                break;
             default:
                 break;
         }
@@ -131,6 +137,9 @@ class generador {
         switch ($param[3]) {
             case 'local':
                 $pathPlugin = getcwd() . '/' . $param[3] . '/' . $param[4];
+                break;
+            case 'activity':
+                $pathPlugin = getcwd() . '/mod/' . $param[4];
                 break;
             default:
                 break;

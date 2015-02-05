@@ -2441,5 +2441,35 @@ print_object($objUsuario);
         }
         return $returnValue;
     }
+    
+    public function generateController($param){
+        $returnValue = FALSE;
+        $param[3] = 'mod';
+        umask(0);
+        $pathPlugin = getcwd().'/'.$param[3].'/'.$param[4].'/controllers/';
+        $pathPluginView = getcwd().'/'.$param[3].'/'.$param[4].'/views/';
+        if(file_exists($pathPlugin)){
+            //verificamos si el controlador ya existe
+            $file = $pathPlugin.ucwords(strtolower($param[5])).'Controller.php';
+            $folderView = $pathPluginView. ucwords(strtolower($param[5])).'/';
+            $fileView = $pathPluginView.ucwords(strtolower($param[5])).'/index.php';
+            if(!file_exists($file) && !file_exists($folderView) && !file_exists($fileView)){
+                //creamos el archivo controladora
+                $myfile = fopen($file, "w") or die("Unable to open file!");
+                $txt = $this->getContentFile($pathPlugin, $file, $param[4], 'controller', $param[5]);
+                fwrite($myfile, $txt);
+                fclose($myfile);
+                //creamos su vista index por defecto
+                mkdir($folderView);
+                //creamos el archivo de la vista del nuevo controlador
+                $myfileView = fopen($fileView, "w") or die("Unable to open file!");
+                $txtView = $this->getContentFile($pathPlugin, $fileView, $param[4], 'view', $param[5]);
+                fwrite($myfileView, $txtView);
+                fclose($myfileView);
+                $returnValue = TRUE;
+            }
+        }
+        return $returnValue;
+    }    
 
 }
