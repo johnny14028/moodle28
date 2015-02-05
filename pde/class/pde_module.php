@@ -1878,6 +1878,485 @@ class Model {
     
 }';
                 break;
+            case $pathPackage . '/backup/moodle2/backup_' . $name . '_activity_task.class.php':
+                $returnValue = '<?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Defines backup_' . $name . '_activity_task class
+ *
+ * @package   mod_' . $name . '
+ * @category  backup
+ * @copyright 2015 Your Name <your@email.adress>
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+defined(\'MOODLE_INTERNAL\') || die;
+
+require_once($CFG->dirroot . \'/mod/' . $name . '/backup/moodle2/backup_' . $name . '_stepslib.php\');
+
+/**
+ * Provides the steps to perform one complete backup of the ' . $name . ' instance
+ *
+ * @package   mod_' . $name . '
+ * @category  backup
+ * @copyright 2015 Your Name <your@email.adress>
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class backup_' . $name . '_activity_task extends backup_activity_task {
+
+    /**
+     * No specific settings for this activity
+     */
+    protected function define_my_settings() {
+    }
+
+    /**
+     * Defines a backup step to store the instance data in the ' . $name . '.xml file
+     */
+    protected function define_my_steps() {
+        $this->add_step(new backup_' . $name . '_activity_structure_step(\'' . $name . '_structure\', \'' . $name . '.xml\'));
+    }
+
+    /**
+     * Encodes URLs to the index.php and view.php scripts
+     *
+     * @param string $content some HTML text that eventually contains URLs to the activity instance scripts
+     * @return string the content with the URLs encoded
+     */
+    static public function encode_content_links($content) {
+        global $CFG;
+
+        $base = preg_quote($CFG->wwwroot, \'/\');
+
+        // Link to the list of ' . $name . 's.
+        $search = \'/(\'.$base.\'\/mod\/' . $name . '\/index.php\?id\=)([0-9]+)/\';
+        $content = preg_replace($search, \'$@' . strtoupper(strtolower($name)) . 'INDEX*$2@$\', $content);
+
+        // Link to ' . $name . ' view by moduleid.
+        $search = \'/(\'.$base.\'\/mod\/' . $name . '\/view.php\?id\=)([0-9]+)/\';
+        $content = preg_replace($search, \'$@' . strtoupper(strtolower($name)) . 'VIEWBYID*$2@$\', $content);
+
+        return $content;
+    }
+}
+';
+                break;
+            case $pathPackage . '/backup/moodle2/backup_' . $name . '_stepslib.php':
+                $returnValue = '<?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Define all the backup steps that will be used by the backup_' . $name . '_activity_task
+ *
+ * @package   mod_' . $name . '
+ * @category  backup
+ * @copyright 2015 Your Name <your@email.adress>
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+defined(\'MOODLE_INTERNAL\') || die;
+
+/**
+ * Define the complete ' . $name . ' structure for backup, with file and id annotations
+ *
+ * @package   mod_' . $name . '
+ * @category  backup
+ * @copyright 2015 Your Name <your@email.adress>
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class backup_' . $name . '_activity_structure_step extends backup_activity_structure_step {
+
+    /**
+     * Defines the backup structure of the module
+     *
+     * @return backup_nested_element
+     */
+    protected function define_structure() {
+
+        // Get know if we are including userinfo.
+        $userinfo = $this->get_setting_value(\'userinfo\');
+
+        // Define the root element describing the ' . $name . ' instance.
+        $' . $name . ' = new backup_nested_element(\'' . $name . '\', array(\'id\'), array(
+            \'name\', \'intro\', \'introformat\', \'grade\'));
+
+        // If we had more elements, we would build the tree here.
+
+        // Define data sources.
+        $' . $name . '->set_source_table(\'' . $name . '\', array(\'id\' => backup::VAR_ACTIVITYID));
+
+        // If we were referring to other tables, we would annotate the relation
+        // with the element\'s annotate_ids() method.
+
+        // Define file annotations (we do not use itemid in this example).
+        $' . $name . '->annotate_files(\'mod_' . $name . '\', \'intro\', null);
+
+        // Return the root element (' . $name . '), wrapped into standard activity structure.
+        return $this->prepare_activity_structure($' . $name . ');
+    }
+}
+';
+                break;
+            case $pathPackage . '/backup/moodle2/restore_' . $name . '_activity_task.class.php':
+                $returnValue = '<?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Provides the restore activity task class
+ *
+ * @package   mod_' . $name . '
+ * @category  backup
+ * @copyright 2015 Your Name <your@email.adress>
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+defined(\'MOODLE_INTERNAL\') || die();
+
+require_once($CFG->dirroot . \'/mod/' . $name . '/backup/moodle2/restore_' . $name . '_stepslib.php\');
+
+/**
+ * Restore task for the ' . $name . ' activity module
+ *
+ * Provides all the settings and steps to perform complete restore of the activity.
+ *
+ * @package   mod_' . $name . '
+ * @category  backup
+ * @copyright 2015 Your Name <your@email.adress>
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class restore_' . $name . '_activity_task extends restore_activity_task {
+
+    /**
+     * Define (add) particular settings this activity can have
+     */
+    protected function define_my_settings() {
+        // No particular settings for this activity.
+    }
+
+    /**
+     * Define (add) particular steps this activity can have
+     */
+    protected function define_my_steps() {
+        // We have just one structure step here.
+        $this->add_step(new restore_' . $name . '_activity_structure_step(\'' . $name . '_structure\', \'' . $name . '.xml\'));
+    }
+
+    /**
+     * Define the contents in the activity that must be
+     * processed by the link decoder
+     */
+    static public function define_decode_contents() {
+        $contents = array();
+
+        $contents[] = new restore_decode_content(\'' . $name . '\', array(\'intro\'), \'' . $name . '\');
+
+        return $contents;
+    }
+
+    /**
+     * Define the decoding rules for links belonging
+     * to the activity to be executed by the link decoder
+     */
+    static public function define_decode_rules() {
+        $rules = array();
+
+        $rules[] = new restore_decode_rule(\'' . strtoupper(strtolower($name)) . 'VIEWBYID\', \'/mod/' . $name . '/view.php?id=$1\', \'course_module\');
+        $rules[] = new restore_decode_rule(\'' . strtoupper(strtolower($name)) . 'INDEX\', \'/mod/' . $name . '/index.php?id=$1\', \'course\');
+
+        return $rules;
+
+    }
+
+    /**
+     * Define the restore log rules that will be applied
+     * by the {@link restore_logs_processor} when restoring
+     * ' . $name . ' logs. It must return one array
+     * of {@link restore_log_rule} objects
+     */
+    static public function define_restore_log_rules() {
+        $rules = array();
+
+        $rules[] = new restore_log_rule(\'' . $name . '\', \'add\', \'view.php?id={course_module}\', \'{' . $name . '}\');
+        $rules[] = new restore_log_rule(\'' . $name . '\', \'update\', \'view.php?id={course_module}\', \'{' . $name . '}\');
+        $rules[] = new restore_log_rule(\'' . $name . '\', \'view\', \'view.php?id={course_module}\', \'{' . $name . '}\');
+
+        return $rules;
+    }
+
+    /**
+     * Define the restore log rules that will be applied
+     * by the {@link restore_logs_processor} when restoring
+     * course logs. It must return one array
+     * of {@link restore_log_rule} objects
+     *
+     * Note this rules are applied when restoring course logs
+     * by the restore final task, but are defined here at
+     * activity level. All them are rules not linked to any module instance (cmid = 0)
+     */
+    static public function define_restore_log_rules_for_course() {
+        $rules = array();
+
+        $rules[] = new restore_log_rule(\'' . $name . '\', \'view all\', \'index.php?id={course}\', null);
+
+        return $rules;
+    }
+}
+';
+                break;
+            case $pathPackage . '/backup/moodle2/restore_' . $name . '_stepslib.php':
+                $returnValue = '<?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Define all the restore steps that will be used by the restore_' . $name . '_activity_task
+ *
+ * @package   mod_' . $name . '
+ * @category  backup
+ * @copyright 2015 Your Name <your@email.adress>
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+/**
+ * Structure step to restore one ' . $name . ' activity
+ *
+ * @package   mod_' . $name . '
+ * @category  backup
+ * @copyright 2015 Your Name <your@email.adress>
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class restore_' . $name . '_activity_structure_step extends restore_activity_structure_step {
+
+    /**
+     * Defines structure of path elements to be processed during the restore
+     *
+     * @return array of {@link restore_path_element}
+     */
+    protected function define_structure() {
+
+        $paths = array();
+        $paths[] = new restore_path_element(\'' . $name . '\', \'/activity/' . $name . '\');
+
+        // Return the paths wrapped into standard activity structure.
+        return $this->prepare_activity_structure($paths);
+    }
+
+    /**
+     * Process the given restore path element data
+     *
+     * @param array $data parsed element data
+     */
+    protected function process_' . $name . '($data) {
+        global $DB;
+
+        $data = (object)$data;
+        $oldid = $data->id;
+        $data->course = $this->get_courseid();
+
+        if (empty($data->timecreated)) {
+            $data->timecreated = time();
+        }
+
+        if (empty($data->timemodified)) {
+            $data->timemodified = time();
+        }
+
+        if ($data->grade < 0) {
+            // Scale found, get mapping.
+            $data->grade = -($this->get_mappingid(\'scale\', abs($data->grade)));
+        }
+
+        // Create the ' . $name . ' instance.
+        $newitemid = $DB->insert_record(\'' . $name . '\', $data);
+        $this->apply_activity_instance($newitemid);
+    }
+
+    /**
+     * Post-execution actions
+     */
+    protected function after_execute() {
+        // Add ' . $name . ' related files, no need to match by itemname (just internally handled context).
+        $this->add_related_files(\'mod_' . $name . '\', \'intro\', null);
+    }
+}
+';
+                break;
+            case $pathPackage . '/classes/event/course_module_instance_list_viewed.php':
+                $returnValue = '<?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * The mod_' . $name . ' instance list viewed event.
+ *
+ * @package    mod_' . $name . '
+ * @copyright  2015 Your Name <your@email.adress>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+namespace mod_' . $name . '\event;
+
+defined(\'MOODLE_INTERNAL\') || die();
+
+/**
+ * The mod_' . $name . ' instance list viewed event class.
+ *
+ * @package    mod_' . $name . '
+ * @copyright  2015 Your Name <your@email.adress>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class course_module_instance_list_viewed extends \core\event\course_module_instance_list_viewed {
+}
+';
+                break;
+            case $pathPackage . '/classes/event/course_module_viewed.php':
+                $returnValue = '<?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Defines the view event.
+ *
+ * @package    mod_' . $name . '
+ * @copyright  2015 Your Name <your@email.adress>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+namespace mod_' . $name . '\event;
+
+defined(\'MOODLE_INTERNAL\') || die();
+
+/**
+ * The mod_' . $name . ' instance list viewed event class
+ *
+ * If the view mode needs to be stored as well, you may need to
+ * override methods get_url() and get_legacy_log_data(), too.
+ *
+ * @package    mod_' . $name . '
+ * @copyright  2015 Your Name <your@email.adress>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class course_module_viewed extends \core\event\course_module_viewed {
+
+    /**
+     * Initialize the event
+     */
+    protected function init() {
+        $this->data[\'objecttable\'] = \'' . $name . '\';
+        parent::init();
+    }
+}
+';
+                break;
+            default:
+                if ($default == 'controller') {
+                    $returnValue = '<?php
+require_once(__DIR__.\'/../mvc/command/Command.php\');
+require_once(__DIR__.\'/../model/Model.php\');
+class ' . ucwords(strtolower($nameC)) . 'Controller extends mvc_command_Command{
+    private $model;
+    
+    public function __construct() {
+        $this->model = new Model();
+    }
+    
+    public function index(){
+        global $USER;
+        $objUsuario = $this->model->getUser();
+        return array(
+            \'usuario\'=>$USER->firstname,
+            \'controlador\'=>\'' . ucwords(strtolower($nameC)) . '\',
+            \'name_plugin\'=>  get_string(\'pluginname\', \'' . $name . '\'),
+            \'objUsuario\'=> $objUsuario
+            );        
+    }
+}';
+                } else {
+                    if ($default == 'view') {
+                        $returnValue = '<h1>Bievenido <?php echo $usuario ?> al controlador <?php echo $controlador ?> del plugin <?php echo $name_plugin ?></h1>
+
+<?php
+print_object($objUsuario);
+?> ';
+                    }
+                }
+                break;
         }
         return $returnValue;
     }
