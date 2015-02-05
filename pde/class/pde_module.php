@@ -37,17 +37,62 @@ class pde_module {
                 mkdir($path);
             }
         }
-//        $files = $this->listFile($pathPackage, $name);
-//        if (is_array($files) && count($files) > 0) {
-//            foreach ($files as $indice => $file) {
-//                $myfile = fopen($file, "w") or die("Unable to open file!");
-//                $txt = $this->getContentFile($pathPackage, $file, $name);
-//                fwrite($myfile, $txt);
-//                fclose($myfile);
-//            }
-//        }
+        $files = $this->listFile($pathPackage, $name);
+        if (is_array($files) && count($files) > 0) {
+            foreach ($files as $indice => $file) {
+                $myfile = fopen($file, "w") or die("Unable to open file!");
+                $txt = '';//$this->getContentFile($pathPackage, $file, $name);
+                fwrite($myfile, $txt);
+                fclose($myfile);
+            }
+        }
     }
-    
+
+    private function listFile($pathPackage, $name) {
+        $returnValue = array();
+        array_push($returnValue, $pathPackage . '/index.php');
+        array_push($returnValue, $pathPackage . '/localib.php');
+        array_push($returnValue, $pathPackage . '/version.php');
+        array_push($returnValue, $pathPackage . '/README.txt');
+        array_push($returnValue, $pathPackage . '/view.php');
+        array_push($returnValue, $pathPackage . '/grade.php');
+        array_push($returnValue, $pathPackage . '/lib.php');
+        array_push($returnValue, $pathPackage . '/mod_form.php');
+        array_push($returnValue, $pathPackage . '/controllers/DefaultController.php');
+        array_push($returnValue, $pathPackage . '/db/install.php');
+        array_push($returnValue, $pathPackage . '/db/access.php');
+        array_push($returnValue, $pathPackage . '/db/uninstall.php');
+        array_push($returnValue, $pathPackage . '/db/upgrade.php');
+        array_push($returnValue, $pathPackage . '/db/install.xml');
+        array_push($returnValue, $pathPackage . '/js/' . $name . '.js');
+        array_push($returnValue, $pathPackage . '/js/jquery.js');
+        array_push($returnValue, $pathPackage . '/css/' . $name . '.css');
+        array_push($returnValue, $pathPackage . '/lang/es/' . $name . '.php');
+        array_push($returnValue, $pathPackage . '/lang/en/' . $name . '.php');
+        array_push($returnValue, $pathPackage . '/mvc/base/Registry.php');
+        array_push($returnValue, $pathPackage . '/mvc/base/RequestRegistry.php');
+        array_push($returnValue, $pathPackage . '/mvc/base/SessionRegistry.php');
+        array_push($returnValue, $pathPackage . '/mvc/command/Command.php');
+        array_push($returnValue, $pathPackage . '/mvc/command/CommandResolver.php');
+        array_push($returnValue, $pathPackage . '/mvc/command/DefaultCommand.php');
+        array_push($returnValue, $pathPackage . '/mvc/controller/Controller.php');
+        array_push($returnValue, $pathPackage . '/mvc/controller/Request.php');
+        array_push($returnValue, $pathPackage . '/mvc/controller/Session.php');
+        array_push($returnValue, $pathPackage . '/mvc/require/autoload.php');
+        array_push($returnValue, $pathPackage . '/mvc/views/error.php');
+        array_push($returnValue, $pathPackage . '/mvc/views/header.php');
+        array_push($returnValue, $pathPackage . '/mvc/views/footer.php');
+        array_push($returnValue, $pathPackage . '/views/Default/index.php');
+        array_push($returnValue, $pathPackage . '/model/Model.php');
+        array_push($returnValue, $pathPackage . '/backup/moodle2/backup_'.$name.'_activity_task.class.php');
+        array_push($returnValue, $pathPackage . '/backup/moodle2/backup_'.$name.'_stepslib.php');
+        array_push($returnValue, $pathPackage . '/backup/moodle2/restore_'.$name.'_activity_task.class.php');
+        array_push($returnValue, $pathPackage . '/backup/moodle2/restore_'.$name.'_stepslib.php');
+        array_push($returnValue, $pathPackage . '/classes/event/course_module_instance_list_viewed.php');
+        array_push($returnValue, $pathPackage . '/classes/event/course_module_viewed.php');
+        return $returnValue;
+    }
+
     private function listFolder($pathPackage) {
         $returnValue = array();
         array_push($returnValue, $pathPackage);
@@ -73,7 +118,7 @@ class pde_module {
         array_push($returnValue, $pathPackage . '/views/Default');
         array_push($returnValue, $pathPackage . '/model');
         return $returnValue;
-    }    
+    }
 
     public function existPackage($path, $package) {
         $returnValue = FALSE;
