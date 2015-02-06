@@ -9,7 +9,7 @@ class generador {
 
     private $color;
     private $generate = 'generate';
-    private $type = array('local', 'controller','activity');
+    private $type = array('local', 'controller','activity','report');
     public $local;
     public $report;
     public $module;
@@ -43,6 +43,9 @@ class generador {
                                     break;
                                 case 'activity':
                                     $this->module->run($param[3]);
+                                    break;
+                                case 'report':
+                                    $this->report->run($param[3]);
                                     break;
                                 case 'controller':
                                     $this->generateController($param);
