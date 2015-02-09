@@ -54,6 +54,7 @@ class pde_local {
         array_push($returnValue, $pathPackage . '/settings.php');
         array_push($returnValue, $pathPackage . '/version.php');
         array_push($returnValue, $pathPackage . '/phpdoc.xml');
+        array_push($returnValue, $pathPackage . '/README.txt');        
         array_push($returnValue, $pathPackage . '/controllers/DefaultController.php');
         array_push($returnValue, $pathPackage . '/db/install.php');
         array_push($returnValue, $pathPackage . '/db/access.php');
@@ -189,6 +190,12 @@ $plugin->component = \'local_' . $name . '\';';
         <directory>.</directory>
     </files>
 </phpdoc>';
+                break;
+            case $pathPackage . '/README.txt':
+                $returnValue = 'PHP Documentor
+./../../vendor/bin/phpdoc --cache-folder="../../../phpdoccache/module/'.$name.'"
+
+Good luck!';
                 break;
             case $pathPackage . '/controllers/DefaultController.php':
                 $returnValue = '<?php

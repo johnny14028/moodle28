@@ -306,6 +306,9 @@ this module template code.
 
 We encourage you to share your code and experience - visit http://moodle.org
 
+PHP Documentor
+./../../vendor/bin/phpdoc --cache-folder="../../../phpdoccache/module/'.$name.'"
+
 Good luck!
 ';
                 break;
