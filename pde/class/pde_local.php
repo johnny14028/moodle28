@@ -193,7 +193,7 @@ $plugin->component = \'local_' . $name . '\';';
                 break;
             case $pathPackage . '/README.txt':
                 $returnValue = 'PHP Documentor
-./../../vendor/bin/phpdoc --cache-folder="../../../phpdoccache/module/'.$name.'"
+./../../vendor/bin/phpdoc --cache-folder="../../../phpdoccache/local/'.$name.'"
 
 Good luck!';
                 break;
@@ -205,7 +205,6 @@ Good luck!';
  * requerimiento.
  */
 
-namespace ' . ucfirst(strtolower($name)) . '\Controller;
 require_once(__DIR__ . \'/../mvc/command/Command.php\');
 require_once(__DIR__ . \'/../model/Model.php\');
 
@@ -246,7 +245,7 @@ class DefaultController extends mvc_command_Command {
         $objUsuario = $this->model->getUser();
         return array(
             \'usuario\' => $USER->firstname,
-            \'name_plugin\' => get_string(\'pluginname\', \'' . $name . '\'),
+            \'name_plugin\' => get_string(\'pluginname\', \'local_' . $name . '\'),
             \'objUsuario\' => $objUsuario
         );
     }
@@ -334,7 +333,6 @@ print_object($objUsuario);
             case $pathPackage . '/mvc/base/Registry.php':
                 $returnValue = '<?php
 
-namespace Mvc\Base;
 
 /**
  * Clase para abstraer los metodos get y set
@@ -367,7 +365,6 @@ abstract class mvc_base_Registry {
  * objetos de tipo request y trabajar con sus valores.
  */
 
-namespace Mvc\Base;
 
 require_once(\'mvc/base/Registry.php\');
 
@@ -460,7 +457,6 @@ class mvc_base_RequestRegistry extends mvc_base_Registry {
  * Archivo para registrar las sessiones
  */
 
-namespace Mvc\Base;
 
 require_once \'mvc/base/Registry.php\';
 
@@ -546,7 +542,6 @@ class mvc_base_SessionRegistry extends mvc_base_Registry {
  * Archivo  para registrar los metodos de ruteo.
  */
 
-namespace Mvc\Command;
 
 require_once(__DIR__ . \'/../controller/Request.php\');
 require_once(__DIR__ . \'/../controller/Session.php\');
@@ -649,8 +644,8 @@ abstract class mvc_command_Command {
         if (!$func)
             $func = \'index\';
 
-        $func = str_replace(array(\'.\', \'/\', \'\\\'), \'\', $func);
-        $cmd = str_replace(array(\'.\', \'/\', \'\\\'), \'\', $cmd);
+        $func = str_replace(array(\'.\', \'/\', \'\\\\\'), \'\', $func);
+        $cmd = str_replace(array(\'.\', \'/\', \'\\\\\'), \'\', $cmd);
         $this->queryString = "cmd=$cmd&action=$func";
         $this->fileViewDefault = "views/{$cmd}/index.php";
         $fileView2 = "views/{$cmd}/$func.php";
@@ -729,7 +724,6 @@ abstract class mvc_command_Command {
  * y resolver casos por defecto.
  */
 
-namespace Mvc\Command;
 
 require_once(__DIR__ . \'/../command/Command.php\');
 require_once(__DIR__ . \'/../controller/Request.php\');
@@ -801,8 +795,8 @@ class mvc_command_CommandResolver {
             $cmd = \'Default\';
         if (!$func)
             $func = \'Index\';
-        $cmd = str_replace(array(\'.\', \'/\', \'\\\'), \'\', $cmd);
-        $func = str_replace(array(\'.\', \'/\', \'\\\'), \'\', $func);
+        $cmd = str_replace(array(\'.\', \'/\', \'\\\\\'), \'\', $cmd);
+        $func = str_replace(array(\'.\', \'/\', \'\\\\\'), \'\', $func);
 
 
 
@@ -845,7 +839,6 @@ class mvc_command_CommandResolver {
  * Archivo para cargar los request con valores por defecto.
  */
 
-namespace Mvc\Command;
 
 require_once(__DIR__ . \'/../command/Command.php\');
 require_once(__DIR__ . \'/../controller/Request.php\');
@@ -879,7 +872,6 @@ class mvc_command_DefaultCommand extends mvc_command_Command {
  * Archivo para crear la clase del controlador general.
  */
 
-namespace Mvc\Controller;
 
 require_once(\'Request.php\');
 require_once(__DIR__ . \'/../command/CommandResolver.php\');
@@ -931,7 +923,6 @@ class mvc_controller_Controller {
  * Archivo del controlador de request;
  */
 
-namespace Mvc\Controller;
 
 require_once(__DIR__ . \'/../base/RequestRegistry.php\');
 
@@ -1027,7 +1018,6 @@ class mvc_controller_Request {
  * Archivo para controlar las sessiones.
  */
 
-namespace Mvc\Controller;
 
 require_once \'mvc/base/SessionRegistry.php\';
 
@@ -1145,7 +1135,6 @@ class mvc_controller_Session {
  * a traves del ORM de Moodle
  */
 
-namespace ' . ucfirst(strtolower($name)) . '\Model;
 
 /**
  * Clase Model para definir los metodos que proveerá los datos de la BD
@@ -1186,15 +1175,14 @@ class Model {
  * requerimiento.
  */
 
-namespace ' . ucfirst(strtolower($name)) . '\Controller;
 require_once(__DIR__ . \'/../mvc/command/Command.php\');
 require_once(__DIR__ . \'/../model/Model.php\');
 
 /**
- * Clase controladora ' . ucfirst(strtolower($name)) . ' para cargar las vistas iniciales.
+ * Clase controladora ' . ucfirst(strtolower($nameC)) . ' para cargar las vistas iniciales.
  * 
  * Esta clase se autogenera con em metodo index por defecto que carga la vista
- * index de la carpeta views/' . ucfirst(strtolower($name)) . '/index.php.
+ * index de la carpeta views/' . ucfirst(strtolower($nameC)) . '/index.php.
  * 
  * @package ' . ucfirst(strtolower($name)) . '
  * @author Johnny Huamani <jhuamanip@pucp.pe>

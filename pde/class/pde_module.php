@@ -46,6 +46,14 @@ class pde_module {
                 fclose($myfile);
             }
         }
+        
+        //copiamos las imagenes para el plugin
+        $pathSourse = 'pde/pix/module/pix/';
+        if(is_dir($pathSourse)){
+            copy($pathSourse.'icon.gif', 'mod/'.$name.'/pix/icon.gif');
+            copy($pathSourse.'icon.png', 'mod/'.$name.'/pix/icon.png');
+            copy($pathSourse.'icon.svg', 'mod/'.$name.'/pix/icon.svg');
+        }
     }
 
     private function getContentFile($pathPackage, $file, $name, $default = '', $nameC = '') {
@@ -986,7 +994,6 @@ class mod_' . $name . '_mod_form extends moodleform_mod {
  * requerimiento.
  */
 
-namespace ' . ucfirst(strtolower($name)) . '\Controller;
 require_once(__DIR__ . \'/../mvc/command/Command.php\');
 require_once(__DIR__ . \'/../model/Model.php\');
 
@@ -1435,7 +1442,7 @@ $string[\'' . $name . 'name\'] = \'' . $name . ' name\';
 $string[\'' . $name . 'name_help\'] = \'This is the content of the help tooltip associated with the ' . $name . 'name field. Markdown syntax is supported.\';
 $string[\'' . $name . '\'] = \'' . $name . '\';
 $string[\'pluginadministration\'] = \'' . $name . ' administration\';
-$string[\'pluginname\'] = \'' . $name . '\';
+$string[\'pluginname\'] = \'' . ucwords(strtolower($name)) . '\';
 $string[\'no' . $name . 's\'] = \'Not found this module in mod directory\';
 ';
                 break;
@@ -1478,7 +1485,7 @@ $string[\'' . $name . 'name\'] = \'' . $name . ' name\';
 $string[\'' . $name . 'name_help\'] = \'This is the content of the help tooltip associated with the ' . $name . 'name field. Markdown syntax is supported.\';
 $string[\'' . $name . '\'] = \'' . $name . '\';
 $string[\'pluginadministration\'] = \'' . $name . ' administration\';
-$string[\'pluginname\'] = \'' . $name . '\';
+$string[\'pluginname\'] = \'' . ucwords(strtolower($name)) . '\';
 $string[\'no' . $name . 's\'] = \'Not found this module in mod directory\';
 ';
                 break;
@@ -1492,7 +1499,6 @@ print_object($objUsuario);
             case $pathPackage . '/mvc/base/Registry.php':
                 $returnValue = '<?php
 
-namespace Mvc\Base;
 
 /**
  * Clase para abstraer los metodos get y set
@@ -1525,7 +1531,6 @@ abstract class mvc_base_Registry {
  * objetos de tipo request y trabajar con sus valores.
  */
 
-namespace Mvc\Base;
 
 require_once(\'mvc/base/Registry.php\');
 
@@ -1618,7 +1623,6 @@ class mvc_base_RequestRegistry extends mvc_base_Registry {
  * Archivo para registrar las sessiones
  */
 
-namespace Mvc\Base;
 
 require_once \'mvc/base/Registry.php\';
 
@@ -1704,7 +1708,6 @@ class mvc_base_SessionRegistry extends mvc_base_Registry {
  * Archivo  para registrar los metodos de ruteo.
  */
 
-namespace Mvc\Command;
 
 require_once(__DIR__ . \'/../controller/Request.php\');
 require_once(__DIR__ . \'/../controller/Session.php\');
@@ -1807,8 +1810,8 @@ abstract class mvc_command_Command {
         if (!$func)
             $func = \'index\';
 
-        $func = str_replace(array(\'.\', \'/\', \'\\\'), \'\', $func);
-        $cmd = str_replace(array(\'.\', \'/\', \'\\\'), \'\', $cmd);
+        $func = str_replace(array(\'.\', \'/\', \'\\\\\'), \'\', $func);
+        $cmd = str_replace(array(\'.\', \'/\', \'\\\\\'), \'\', $cmd);
         $this->queryString = "cmd=$cmd&action=$func";
         $this->fileViewDefault = "views/{$cmd}/index.php";
         $fileView2 = "views/{$cmd}/$func.php";
@@ -1887,7 +1890,6 @@ abstract class mvc_command_Command {
  * y resolver casos por defecto.
  */
 
-namespace Mvc\Command;
 
 require_once(__DIR__ . \'/../command/Command.php\');
 require_once(__DIR__ . \'/../controller/Request.php\');
@@ -1959,8 +1961,8 @@ class mvc_command_CommandResolver {
             $cmd = \'Default\';
         if (!$func)
             $func = \'Index\';
-        $cmd = str_replace(array(\'.\', \'/\', \'\\\'), \'\', $cmd);
-        $func = str_replace(array(\'.\', \'/\', \'\\\'), \'\', $func);
+        $cmd = str_replace(array(\'.\', \'/\', \'\\\\\'), \'\', $cmd);
+        $func = str_replace(array(\'.\', \'/\', \'\\\\\'), \'\', $func);
 
 
 
@@ -2003,7 +2005,6 @@ class mvc_command_CommandResolver {
  * Archivo para cargar los request con valores por defecto.
  */
 
-namespace Mvc\Command;
 
 require_once(__DIR__ . \'/../command/Command.php\');
 require_once(__DIR__ . \'/../controller/Request.php\');
@@ -2037,7 +2038,6 @@ class mvc_command_DefaultCommand extends mvc_command_Command {
  * Archivo para crear la clase del controlador general.
  */
 
-namespace Mvc\Controller;
 
 require_once(\'Request.php\');
 require_once(__DIR__ . \'/../command/CommandResolver.php\');
@@ -2089,7 +2089,6 @@ class mvc_controller_Controller {
  * Archivo del controlador de request;
  */
 
-namespace Mvc\Controller;
 
 require_once(__DIR__ . \'/../base/RequestRegistry.php\');
 
@@ -2185,7 +2184,6 @@ class mvc_controller_Request {
  * Archivo para controlar las sessiones.
  */
 
-namespace Mvc\Controller;
 
 require_once \'mvc/base/SessionRegistry.php\';
 
@@ -2303,7 +2301,6 @@ class mvc_controller_Session {
  * a traves del ORM de Moodle
  */
 
-namespace ' . ucfirst(strtolower($name)) . '\Model;
 
 /**
  * Clase Model para definir los metodos que proveerá los datos de la BD
@@ -2715,7 +2712,6 @@ class restore_' . $name . '_activity_structure_step extends restore_activity_str
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace mod_' . $name . '\event;
 
 defined(\'MOODLE_INTERNAL\') || die();
 
@@ -2755,6 +2751,7 @@ class course_module_instance_list_viewed extends \core\event\course_module_insta
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+
 namespace mod_' . $name . '\event;
 
 defined(\'MOODLE_INTERNAL\') || die();
@@ -2790,15 +2787,14 @@ class course_module_viewed extends \core\event\course_module_viewed {
  * requerimiento.
  */
 
-namespace ' . ucfirst(strtolower($name)) . '\Controller;
 require_once(__DIR__ . \'/../mvc/command/Command.php\');
 require_once(__DIR__ . \'/../model/Model.php\');
 
 /**
- * Clase controladora ' . ucfirst(strtolower($name)) . ' para cargar las vistas iniciales.
+ * Clase controladora ' . ucfirst(strtolower($nameC)) . ' para cargar las vistas iniciales.
  * 
  * Esta clase se autogenera con em metodo index por defecto que carga la vista
- * index de la carpeta views/' . ucfirst(strtolower($name)) . '/index.php.
+ * index de la carpeta views/' . ucfirst(strtolower($nameC)) . '/index.php.
  * 
  * @package ' . ucfirst(strtolower($name)) . '
  * @author Johnny Huamani <jhuamanip@pucp.pe>
