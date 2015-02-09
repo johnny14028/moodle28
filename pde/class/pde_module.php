@@ -233,6 +233,25 @@ $plugin->cron = 0;
 $plugin->dependencies = array();
 ';
                 break;
+            case $pathPackage . '/phpdoc.xml':
+                $returnValue = '<?xml version="1.0" encoding="UTF-8"?>
+<phpdoc>
+    <title>Plugin ' . ucfirst(strtolower($name)) . '</title>
+    <parser>
+        <default-package-name>' . ucfirst(strtolower($name)) . '</default-package-name>
+        <target>../../output/module/' . $name . '</target>
+        <extensions>
+            <extension>php</extension>
+        </extensions>        
+    </parser>
+    <transformer>
+        <target>../../output/module/' . $name . '</target>
+    </transformer>
+    <files>
+        <directory>.</directory>
+    </files>
+</phpdoc>';
+                break;
             case $pathPackage . '/README.txt':
                 $returnValue = 'The following steps should get you up and running with
 this module template code.
@@ -958,23 +977,56 @@ class mod_' . $name . '_mod_form extends moodleform_mod {
                 break;
             case $pathPackage . '/controllers/DefaultController.php':
                 $returnValue = '<?php
-require_once(__DIR__.\'/../mvc/command/Command.php\');
-require_once(__DIR__.\'/../model/Model.php\');
-class DefaultController extends mvc_command_Command{
+/**
+ * Archivo para definir una sola clase de tipo controlador y sus métodos
+ * para desarrollar una acción o un caso de uso, según el analisis del
+ * requerimiento.
+ */
+
+namespace ' . ucfirst(strtolower($name)) . '\Controller;
+require_once(__DIR__ . \'/../mvc/command/Command.php\');
+require_once(__DIR__ . \'/../model/Model.php\');
+
+/**
+ * Clase controladora Default para cargar las vistas iniciales.
+ * 
+ * Esta clase se autogenera con em metodo index por defecto que carga la vista
+ * index de la carpeta views/Default/index.php.
+ * 
+ * @package ' . ucfirst(strtolower($name)) . '
+ * @author Johnny Huamani <jhuamanip@pucp.pe>
+ * @version 1.0
+ */
+class DefaultController extends mvc_command_Command {
+
+    /**
+     * atributo para guardar la instancia a la clase modelo, donde se tendrá a
+     * metodos con acceso a la BD.
+     * @var object 
+     */
     private $model;
-    
+
+    /**
+     * Metodo inicializador para cargar las instancias de los atributos.
+     */
     public function __construct() {
         $this->model = new Model();
     }
-    
-    public function index(){
+
+    /**
+     * Método para cargar la vista por defecto, la vista index en la carpeta
+     * con el mismo nombre del controlador dentro de la carpeta views.
+     * @global array $USER
+     * @return array
+     */
+    public function index() {
         global $USER;
         $objUsuario = $this->model->getUser();
         return array(
-            \'usuario\'=>$USER->firstname,
-            \'name_plugin\'=>  get_string(\'pluginname\', \'' . $name . '\'),
-            \'objUsuario\'=> $objUsuario
-            );        
+            \'usuario\' => $USER->firstname,
+            \'name_plugin\' => get_string(\'pluginname\', \'' . $name . '\'),
+            \'objUsuario\' => $objUsuario
+        );
     }
 }';
                 break;
@@ -1437,31 +1489,77 @@ print_object($objUsuario);
             case $pathPackage . '/mvc/base/Registry.php':
                 $returnValue = '<?php
 
+namespace Mvc\Base;
+
+/**
+ * Clase para abstraer los metodos get y set
+ */
 abstract class mvc_base_Registry {
 
+    /**
+     * iniciamos los valores de entrada
+     */
     public function __construct() {
         
     }
 
+    /**
+     * @param string $key nombre de la variable
+     */
     protected abstract function get($key);
 
+    /**
+     * @param string $key indice del valor
+     * @param string $value valor de la variable $key
+     */
     protected abstract function set($key, $value);
 }';
                 break;
             case $pathPackage . '/mvc/base/RequestRegistry.php':
                 $returnValue = '<?php
+/**
+ * Archivo para crear la clase de registro de request para obtener y crear
+ * objetos de tipo request y trabajar con sus valores.
+ */
+
+namespace Mvc\Base;
 
 require_once(\'mvc/base/Registry.php\');
 
+/**
+ * Clase de registro de request
+ * 
+ * Clase para registrar movimiento y cambios de los request por session.
+ * 
+ * @package ' . ucfirst(strtolower($name)) . '
+ * @author Johnny Huamani <jhuamanip@pucp.pe>
+ * @version 1.0
+ */
 class mvc_base_RequestRegistry extends mvc_base_Registry {
 
+    /**
+     *
+     * @var array 
+     */
     private $value;
+
+    /**
+     *
+     * @var object 
+     */
     private static $instance;
 
+    /**
+     * Método para inicializar los valores de este objeto
+     */
     public function __construct() {
         
     }
 
+    /**
+     * Método para obtener su propia instancia o crearla si es que no existe.
+     * @return object
+     */
     public static function instance() {
         $returnValue = NULL;
         if (!self::$instance)
@@ -1470,36 +1568,85 @@ class mvc_base_RequestRegistry extends mvc_base_Registry {
         return $returnValue;
     }
 
+    /**
+     * Método para retornar el valor de un indice
+     * @param string $key
+     * @return object
+     */
     protected function get($key) {
         return $this->value[$key];
     }
 
+    /**
+     * Método para setear el valor de un indice o crear
+     * @param string $key
+     * @param object $value
+     */
     protected function set($key, $value) {
         $this->value[$key] = $value;
     }
 
+    /**
+     * Método para retornar el objeto request y sus valores cargados hasta el
+     * momento.
+     * @return object
+     */
     public static function getRequest() {
         $returnValue = NULL;
         $returnValue = self::instance()->get(\'request\');
         return $returnValue;
     }
 
+    /**
+     * Método para cargar el nuevo request con los valores que se desea
+     * @param mvc_controller_Request $objRequest
+     */
     public static function setRequest(mvc_controller_Request $objRequest) {
         self::instance()->set(\'request\', $objRequest);
     }
 
-}';
+}
+';
                 break;
             case $pathPackage . '/mvc/base/SessionRegistry.php':
                 $returnValue = '<?php
 
+/**
+ * Archivo para registrar las sessiones
+ */
+
+namespace Mvc\Base;
+
 require_once \'mvc/base/Registry.php\';
 
+/**
+ * Clase de registros para las sessiones
+ * 
+ * Clase que se registra, crea, edita los valores de la session de su propia
+ * instancia.
+ * 
+ * @package Newmodule
+ * @author Johnny Huamani <jhuamanip@pucp.pe>
+ * @version 1.0
+ */
 class mvc_base_SessionRegistry extends mvc_base_Registry {
 
+    /**
+     *
+     * @var array 
+     */
     private $value = array();
+
+    /**
+     *  instancia propia de esta clase
+     * @var object 
+     */
     private static $instance = NULL;
 
+    /**
+     * Método para obtener su propia instancia o crearla si es que no existe.
+     * @return object
+     */
     public static function instance() {
         $returnValue = NULL;
         if (!self::$instance) {
@@ -1509,57 +1656,140 @@ class mvc_base_SessionRegistry extends mvc_base_Registry {
         return $returnValue;
     }
 
+    /**
+     * Método para obtener un valor de session por su indice
+     * @param string $key
+     * @return object
+     */
     protected function get($key) {
         return $this->value[$key];
     }
 
+    /**
+     * Método para setear un valor a un indice de una session
+     * @param string $key
+     * @param object $value
+     */
     protected function set($key, $value) {
         $this->value[$key] = $value;
     }
 
+    /**
+     * método para obtener el valor de una session
+     * @return type
+     */
     public static function getSession() {
         $returnValue = NULL;
         $returnValue = self::instance()->get(\'' . $name . '\');
         return $returnValue;
     }
 
+    /**
+     * Metodo para crear una variable en la session
+     * @param mvc_controller_Session $objSession
+     */
     public static function setSession(mvc_controller_Session $objSession) {
         self::instance()->set(\'' . $name . '\', $objSession);
     }
 
-}
-';
+}';
                 break;
             case $pathPackage . '/mvc/command/Command.php':
                 $returnValue = '<?php
 
+/**
+ * Archivo  para registrar los metodos de ruteo.
+ */
+
+namespace Mvc\Command;
+
 require_once(__DIR__ . \'/../controller/Request.php\');
 require_once(__DIR__ . \'/../controller/Session.php\');
 
+/**
+ * Clase para abstraer los metodos que utilizaremos para rutear las vistas.
+ * 
+ * Con esta clase inicializaremos y ejecutaremos los métodos que rutearan
+ * las vistas por cada controlador y propiedades con vistas.
+ * 
+ * @package Newmodule
+ * @author Johnny Huamani <jhuamanip@pucp.pe>
+ * @version 1.0
+ */
 abstract class mvc_command_Command {
 
+    /**
+     *
+     * @var object 
+     */
     public $request;
+
+    /**
+     *
+     * @var object 
+     */
     public $session;
+
+    /**
+     *
+     * @var string 
+     */
     protected $fileView;
+
+    /**
+     *
+     * @var string 
+     */
     protected $headerView;
+
+    /**
+     *
+     * @var string 
+     */
     protected $footerView;
+
+    /**
+     *
+     * @var boolean 
+     */
     private $footerCore = true;
+
+    /**
+     *
+     * @var boolean 
+     */
     private $headerCore = true;
 
+    /**
+     * Método para inicializar valores de este objeto.
+     */
     public function __construct() {
         
     }
 
+    /**
+     * Método para leer la session global.
+     * @return type
+     */
     public function getSession() {
         $this->session = new mvc_controller_Session();
         return $this->session;
     }
 
+    /**
+     * Método para obtener el request que se envía.
+     * @return object
+     */
     public function getRequest() {
         $this->request = new mvc_controller_Request();
         return $this->request;
     }
 
+    /**
+     * Método para cargar las vistas que se puede leer en el request.
+     * @global array $CFG
+     * @param mvc_controller_Request $objRequest
+     */
     public function execute(mvc_controller_Request $objRequest) {
         global $CFG;
         $this->session = new mvc_controller_Session();
@@ -1574,8 +1804,8 @@ abstract class mvc_command_Command {
         if (!$func)
             $func = \'index\';
 
-        $func = str_replace(array(\'.\', \'/\', \'\\\\\'), \'\', $func);
-        $cmd = str_replace(array(\'.\', \'/\', \'\\\\\'), \'\', $cmd);
+        $func = str_replace(array(\'.\', \'/\', \'\\\'), \'\', $func);
+        $cmd = str_replace(array(\'.\', \'/\', \'\\\'), \'\', $cmd);
         $this->queryString = "cmd=$cmd&action=$func";
         $this->fileViewDefault = "views/{$cmd}/index.php";
         $fileView2 = "views/{$cmd}/$func.php";
@@ -1587,10 +1817,10 @@ abstract class mvc_command_Command {
         $this->doExecute($objRequest);
 
         if (method_exists($this, $func)) {
-                $retorno = $this->$func();
-                if(is_array($retorno)){
-                    extract($retorno);
-                }
+            $retorno = $this->$func();
+            if (is_array($retorno)) {
+                extract($retorno);
+            }
         }
         if (file_exists($fileView2)) {
             if ($this->headerCore) {
@@ -1622,30 +1852,69 @@ abstract class mvc_command_Command {
         }
     }
 
+    /**
+     * Método para ejecutar un request.
+     * @param mvc_controller_Request $objRequest
+     */
     public function doExecute(mvc_controller_Request $objRequest) {
         
     }
 
+    /**
+     * Método para desabilitar la cabecera de una vista.
+     */
     public function disabledHeaderCore() {
         $this->headerCore = false;
     }
 
+    /**
+     * Metodo para desabilitar el pie de pagina de una vista.
+     */
     public function disabledFooterCore() {
         $this->footerCore = false;
     }
-}
-';
+
+}';
                 break;
             case $pathPackage . '/mvc/command/CommandResolver.php':
                 $returnValue = '<?php
-require_once(__DIR__.\'/../command/Command.php\');
-require_once(__DIR__.\'/../controller/Request.php\');
-require_once(__DIR__.\'/../command/DefaultCommand.php\');
+
+/**
+ * Archivo que tiene una clase en la que carga los datos iniciales del request 
+ * y resolver casos por defecto.
+ */
+
+namespace Mvc\Command;
+
+require_once(__DIR__ . \'/../command/Command.php\');
+require_once(__DIR__ . \'/../controller/Request.php\');
+require_once(__DIR__ . \'/../command/DefaultCommand.php\');
+
+/**
+ * Clase para resolver cada request que recibe el plugin.
+ * 
+ * @package Newmodule
+ * @author Johnny Huamani <jhuamanip@pucp.pe>
+ * @version 1.0
+ */
 class mvc_command_CommandResolver {
 
+    /**
+     *
+     * @var string 
+     */
     private static $base_cmd = NULL;
+
+    /**
+     * atributo para cargar el valor de cmd
+     * @var string 
+     */
     private static $default_cmd = NULL;
 
+    /**
+     * Método para cargar la vista por defecto.
+     * @throws Exception
+     */
     public function __construct() {
         if (!self::$base_cmd) {
             self::$base_cmd = new ReflectionClass(\'mvc_command_Command\');
@@ -1673,6 +1942,11 @@ class mvc_command_CommandResolver {
         }
     }
 
+    /**
+     * Método para cargar las vistar por cada controlador.
+     * @param mvc_controller_Request $objRequest
+     * @return object
+     */
     public function getCommand(mvc_controller_Request $objRequest) {
         $returnValue = NULL;
         $cmd = $objRequest->getProperty(\'cmd\');
@@ -1682,8 +1956,8 @@ class mvc_command_CommandResolver {
             $cmd = \'Default\';
         if (!$func)
             $func = \'Index\';
-        $cmd = str_replace(array(\'.\', \'/\', \'\\\\\'), \'\', $cmd);
-        $func = str_replace(array(\'.\', \'/\', \'\\\\\'), \'\', $func);
+        $cmd = str_replace(array(\'.\', \'/\', \'\\\'), \'\', $cmd);
+        $func = str_replace(array(\'.\', \'/\', \'\\\'), \'\', $func);
 
 
 
@@ -1721,27 +1995,69 @@ class mvc_command_CommandResolver {
                 break;
             case $pathPackage . '/mvc/command/DefaultCommand.php':
                 $returnValue = '<?php
-require_once(__DIR__.\'/../command/Command.php\');
-require_once(__DIR__.\'/../controller/Request.php\');
-class mvc_command_DefaultCommand extends mvc_command_Command
-{
-    public function doExecute(mvc_controller_Request $objRequest)
-    {
+
+/**
+ * Archivo para cargar los request con valores por defecto.
+ */
+
+namespace Mvc\Command;
+
+require_once(__DIR__ . \'/../command/Command.php\');
+require_once(__DIR__ . \'/../controller/Request.php\');
+
+/**
+ * 
+ * 
+ * Clase para cargar el primer request y tener los valoresde los objetos
+ * request y session con valores iniciales para cargar las vistas por defecto.
+ * 
+ * @package Newmodule
+ * @author Johnny Huamani <jhuamanip@pucp.pe>
+ * @version 1.0
+ */
+class mvc_command_DefaultCommand extends mvc_command_Command {
+
+    /**
+     * Método para cargar el request y obtener las vistas.
+     * @param mvc_controller_Request $objRequest
+     */
+    public function doExecute(mvc_controller_Request $objRequest) {
         $objRequest->addFeedback("Bienvenido: Moodle usando MVC");
     }
+
 }';
                 break;
             case $pathPackage . '/mvc/controller/Controller.php':
                 $returnValue = '<?php
 
-require_once(\'Request.php\');
-require_once(__DIR__.\'/../command/CommandResolver.php\');
+/**
+ * Archivo para crear la clase del controlador general.
+ */
 
+namespace Mvc\Controller;
+
+require_once(\'Request.php\');
+require_once(__DIR__ . \'/../command/CommandResolver.php\');
+
+/**
+ * Controlador general
+ * 
+ * Clase de tipo controlador que recibe los request y este ejecuta metodos para
+ * resolver el requerimiento y cargar las vistas necesarias.
+ * 
+ * @package Newmodule
+ * @author Johnny Huamani <jhuamanip@pucp.pe>
+ * @version 1.0
+ */
 class mvc_controller_Controller {
 
+    /**
+     * iniciando los valores del objeto controlador.
+     */
     public function __construct() {
         
     }
+
     /**
      * obtenemos la instancia del mismo objeto
      */
@@ -1750,9 +2066,13 @@ class mvc_controller_Controller {
         $instance->handleRequest();
     }
 
+    /**
+     * Método para manejar los request y ejecutar los metodos que le permiten
+     * cargar las vistas.
+     */
     public function handleRequest() {
         $objRequest = new mvc_controller_Request();
-        $cmd_r = new mvc_command_CommandResolver();        
+        $cmd_r = new mvc_command_CommandResolver();
         $cmd = $cmd_r->getCommand($objRequest);
         $cmd->execute($objRequest);
     }
@@ -1761,23 +2081,58 @@ class mvc_controller_Controller {
                 break;
             case $pathPackage . '/mvc/controller/Request.php':
                 $returnValue = '<?php
-require_once(__DIR__.\'/../base/RequestRegistry.php\');
 
+/**
+ * Archivo del controlador de request;
+ */
+
+namespace Mvc\Controller;
+
+require_once(__DIR__ . \'/../base/RequestRegistry.php\');
+
+/**
+ * Clase controlador de request.
+ * 
+ * @package Newmodule
+ * @author Johnny Huamani <jhuamanip@pucp.pe>
+ * @version 1.0
+ */
 class mvc_controller_Request {
 
+    /**
+     *
+     * @var array 
+     */
     private $properties = array();
+
+    /**
+     *
+     * @var array 
+     */
     private $feedback = array();
 
+    /**
+     * Método para inciar el manejador de request de este controlador.
+     */
     public function __construct() {
         $this->init();
         mvc_base_RequestRegistry::setRequest($this);
     }
 
+    /**
+     * Mátodo para inicializar capturando el request.
+     * @return void
+     */
     public function init() {
         $this->properties = $_REQUEST;
         return;
     }
 
+    /**
+     * Método para obtener el valor de un indice de este objeto.
+     * @param string $key
+     * @return boolean
+     */
     public function getProperty($key) {
         if (key_exists($key, $this->properties))
             return $this->properties[$key];
@@ -1785,6 +2140,12 @@ class mvc_controller_Request {
             return false;
     }
 
+    /**
+     * Método para setear el valor de un nuevo indice o crearla.
+     * @param string $key
+     * @param object $value
+     * @return boolean
+     */
     public function setProperty($key, $value) {
         if (key_exists($key, $this->properties))
             $this->properties[$key] = $value;
@@ -1792,33 +2153,75 @@ class mvc_controller_Request {
             return false;
     }
 
+    /**
+     * Método para registrar los mensajes de tipo feedback
+     * @param string $message
+     */
     public function addFeedback($message) {
         array_push($this->feedback, $message);
     }
 
+    /**
+     * Método para obtener los feedbacks
+     * @param string $separator
+     * @return string
+     */
     public function getFeedbackString($separator = \'\n\') {
         $returnValue = (string) \'\';
         $returnValue = implode($separator, $this->feedback);
         return $returnValue;
     }
 
-}';
+}
+';
                 break;
             case $pathPackage . '/mvc/controller/Session.php':
                 $returnValue = '<?php
 
+/**
+ * Archivo para controlar las sessiones.
+ */
+
+namespace Mvc\Controller;
+
 require_once \'mvc/base/SessionRegistry.php\';
 
+/**
+ * Clase controladora de sessiones.
+ * 
+ * Clase para manipular las sessiones como objeto.
+ * 
+ * @package Newmodule
+ * @author Johnny Huamani <jhuamanip@pucp.pe>
+ * @version 1.0
+ */
 class mvc_controller_Session {
 
+    /**
+     *
+     * @var array 
+     */
     private $properties = array();
+
+    /**
+     *
+     * @var array 
+     */
     private $feedback = array();
 
+    /**
+     * Método para incializar los valores de la session en curso.
+     */
     public function __construct() {
         $this->init();
         mvc_base_SessionRegistry::setSession($this);
     }
 
+    /**
+     * Método para iniciar session si es que no existieray regitrar en su propiedad 
+     * el valor de la session.
+     * @return void
+     */
     public function init() {
         if (strlen(trim(session_id())) > 0)
             $this->properties = &$_SESSION;
@@ -1827,6 +2230,11 @@ class mvc_controller_Session {
         return;
     }
 
+    /**
+     * Método para obtener el valor de una session.
+     * @param string $key
+     * @return boolean
+     */
     public function getProperty($key) {
         if (key_exists($key, $this->properties))
             return $this->properties[$key];
@@ -1834,25 +2242,47 @@ class mvc_controller_Session {
             return false;
     }
 
+    /**
+     * Método para registrar un valor en una session de PHP.
+     * @param string $key
+     * @param object $value
+     */
     public function setProperty($key, $value) {
         $this->properties[$key] = $value;
     }
 
+    /**
+     * Método para eliminar un valor de la sesión.
+     * @param string $key
+     */
     public function deleteProperty($key) {
         if (key_exists($key, $this->properties))
             unset($this->properties[$key]);
     }
 
+    /**
+     * Método para obtener los feedbacks.
+     * @return array
+     */
     public function getFeedback() {
         $returnValue = array();
         $returnValue = $this->feedback;
         return (array) $returnValue;
     }
 
+    /**
+     * Método para registrar los feedbacks
+     * @param string $message
+     */
     public function addFeedback($message) {
         array_push($this->feedback, $message);
     }
 
+    /**
+     * Método para obtener los feedbacks separador por el caracter que desees.
+     * @param string $separator
+     * @return string
+     */
     public function getFeedbackString($separator = \'\n\') {
         $returnValue = (string) \'\';
         $returnValue = implode($separator, $this->feedback);
@@ -1864,18 +2294,42 @@ class mvc_controller_Session {
             case $pathPackage . '/model/Model.php':
                 $returnValue = '<?php
 
+/**
+ * Archivo para definir una sola clase de tipo Model que es la que se creará
+ * todos los metodos para interactuar con la Base de datos directamente
+ * a traves del ORM de Moodle
+ */
+
+namespace ' . ucfirst(strtolower($name)) . '\Model;
+
+/**
+ * Clase Model para definir los metodos que proveerá los datos de la BD
+ * 
+ * Esta clase se instanciará en todos los controladores para ser usados por estos
+ * y de esta manera tener separados el modelo y el controlador.
+ * 
+ * @package ' . ucfirst(strtolower($name)) . '
+ * @author Johnny Huamani <jhuamanip@pucp.pe>
+ * @version 1.0
+ */
 class Model {
-    
-    public function getUser(){
+
+    /**
+     * Método para obtener el detalle del usuario que unició session
+     * @global array $USER
+     * @global array $DB
+     * @return object
+     */
+    public function getUser() {
         global $USER, $DB;
         $returnValue = NULL;
-        $user = $DB->get_record(\'user\', array(\'id\'=>$USER->id));
-        if(is_object($user)){
+        $user = $DB->get_record(\'user\', array(\'id\' => $USER->id));
+        if (is_object($user)) {
             $returnValue = $user;
         }
         return $returnValue;
     }
-    
+
 }';
                 break;
             case $pathPackage . '/backup/moodle2/backup_' . $name . '_activity_task.class.php':
@@ -2327,16 +2781,49 @@ class course_module_viewed extends \core\event\course_module_viewed {
             default:
                 if ($default == 'controller') {
                     $returnValue = '<?php
-require_once(__DIR__.\'/../mvc/command/Command.php\');
-require_once(__DIR__.\'/../model/Model.php\');
-class ' . ucwords(strtolower($nameC)) . 'Controller extends mvc_command_Command{
+/**
+ * Archivo para definir una sola clase de tipo controlador y sus métodos
+ * para desarrollar una acción o un caso de uso, según el analisis del
+ * requerimiento.
+ */
+
+namespace ' . ucfirst(strtolower($name)) . '\Controller;
+require_once(__DIR__ . \'/../mvc/command/Command.php\');
+require_once(__DIR__ . \'/../model/Model.php\');
+
+/**
+ * Clase controladora ' . ucfirst(strtolower($name)) . ' para cargar las vistas iniciales.
+ * 
+ * Esta clase se autogenera con em metodo index por defecto que carga la vista
+ * index de la carpeta views/' . ucfirst(strtolower($name)) . '/index.php.
+ * 
+ * @package ' . ucfirst(strtolower($name)) . '
+ * @author Johnny Huamani <jhuamanip@pucp.pe>
+ * @version 1.0
+ */
+class ' . ucwords(strtolower($nameC)) . 'Controller extends mvc_command_Command {
+
+    /**
+     * atributo para guardar la instancia a la clase modelo, donde se tendrá a
+     * metodos con acceso a la BD.
+     * @var object 
+     */
     private $model;
-    
+
+    /**
+     * Metodo inicializador para cargar las instancias de los atributos.
+     */
     public function __construct() {
         $this->model = new Model();
     }
-    
-    public function index(){
+
+    /**
+     * Método para cargar la vista por defecto, la vista index en la carpeta
+     * con el mismo nombre del controlador dentro de la carpeta views.
+     * @global array $USER
+     * @return array
+     */
+    public function index() {
         global $USER;
         $objUsuario = $this->model->getUser();
         return array(
@@ -2344,7 +2831,7 @@ class ' . ucwords(strtolower($nameC)) . 'Controller extends mvc_command_Command{
             \'controlador\'=>\'' . ucwords(strtolower($nameC)) . '\',
             \'name_plugin\'=>  get_string(\'pluginname\', \'' . $name . '\'),
             \'objUsuario\'=> $objUsuario
-            );        
+            ); 
     }
 }';
                 } else {
@@ -2371,6 +2858,7 @@ print_object($objUsuario);
         array_push($returnValue, $pathPackage . '/grade.php');
         array_push($returnValue, $pathPackage . '/lib.php');
         array_push($returnValue, $pathPackage . '/mod_form.php');
+        array_push($returnValue, $pathPackage . '/phpdoc.xml');
         array_push($returnValue, $pathPackage . '/controllers/DefaultController.php');
         array_push($returnValue, $pathPackage . '/db/install.php');
         array_push($returnValue, $pathPackage . '/db/access.php');
@@ -2441,19 +2929,19 @@ print_object($objUsuario);
         }
         return $returnValue;
     }
-    
-    public function generateController($param){
+
+    public function generateController($param) {
         $returnValue = FALSE;
         $param[3] = 'mod';
         umask(0);
-        $pathPlugin = getcwd().'/'.$param[3].'/'.$param[4].'/controllers/';
-        $pathPluginView = getcwd().'/'.$param[3].'/'.$param[4].'/views/';
-        if(file_exists($pathPlugin)){
+        $pathPlugin = getcwd() . '/' . $param[3] . '/' . $param[4] . '/controllers/';
+        $pathPluginView = getcwd() . '/' . $param[3] . '/' . $param[4] . '/views/';
+        if (file_exists($pathPlugin)) {
             //verificamos si el controlador ya existe
-            $file = $pathPlugin.ucwords(strtolower($param[5])).'Controller.php';
-            $folderView = $pathPluginView. ucwords(strtolower($param[5])).'/';
-            $fileView = $pathPluginView.ucwords(strtolower($param[5])).'/index.php';
-            if(!file_exists($file) && !file_exists($folderView) && !file_exists($fileView)){
+            $file = $pathPlugin . ucwords(strtolower($param[5])) . 'Controller.php';
+            $folderView = $pathPluginView . ucwords(strtolower($param[5])) . '/';
+            $fileView = $pathPluginView . ucwords(strtolower($param[5])) . '/index.php';
+            if (!file_exists($file) && !file_exists($folderView) && !file_exists($fileView)) {
                 //creamos el archivo controladora
                 $myfile = fopen($file, "w") or die("Unable to open file!");
                 $txt = $this->getContentFile($pathPlugin, $file, $param[4], 'controller', $param[5]);
@@ -2470,6 +2958,6 @@ print_object($objUsuario);
             }
         }
         return $returnValue;
-    }    
+    }
 
 }
