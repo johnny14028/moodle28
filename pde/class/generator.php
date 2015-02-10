@@ -88,6 +88,9 @@ class generador {
                             case 'activity':
                                 $value = $this->module->generateController($param);
                                 break;
+                            case 'report':
+                                $value = $this->report->generateController($param);
+                                break;
                             default:
                                 break;
                         }
@@ -118,6 +121,9 @@ class generador {
             case 'activity':
                 $pathPlugin = getcwd() . '/mod/' . $param[4];
                 break;
+            case 'report':
+                $pathPlugin = getcwd() . '/report/' . $param[4];
+                break;
             default:
                 break;
         }
@@ -143,6 +149,9 @@ class generador {
                 break;
             case 'activity':
                 $pathPlugin = getcwd() . '/mod/' . $param[4];
+                break;
+            case 'report':
+                $pathPlugin = getcwd() . '/report/' . $param[4];
                 break;
             default:
                 break;

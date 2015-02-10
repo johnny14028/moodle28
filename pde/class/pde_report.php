@@ -67,17 +67,17 @@ if (isset($_SERVER[\'HTTP_X_REQUESTED_WITH\'])
         AND strtolower($_SERVER[\'HTTP_X_REQUESTED_WITH\']) === \'xmlhttprequest\') {
     mvc_controller_Controller::run();
 } else {
-    $url = new moodle_url(\'/report/'.$name.'/index.php\', array());
+    $url = new moodle_url(\'/report/' . $name . '/index.php\', array());
     $PAGE->set_context(context_system::instance());
 
 $PAGE->set_url($url);
 $PAGE->set_pagelayout(\'report\');
 
-$PAGE->set_title(get_string(\'pluginname\',\'report_'.$name.'\'));
-$PAGE->set_heading(get_string(\'pluginname\',\'report_'.$name.'\'));    
+$PAGE->set_title(get_string(\'pluginname\',\'report_' . $name . '\'));
+$PAGE->set_heading(get_string(\'pluginname\',\'report_' . $name . '\'));    
 
-    $PAGE->requires->js(\'/report/'.$name.'/js/jquery.js\');
-    $PAGE->requires->js(\'/report/'.$name.'/js/'.$name.'.js\');
+    $PAGE->requires->js(\'/report/' . $name . '/js/jquery.js\');
+    $PAGE->requires->js(\'/report/' . $name . '/js/' . $name . '.js\');
     echo $OUTPUT->header();
     mvc_controller_Controller::run();
     echo $OUTPUT->footer();
@@ -1119,6 +1119,71 @@ class Model {
 
 }';
                 break;
+            default:
+                if ($default == 'controller') {
+                    $returnValue = '<?php
+/**
+ * Archivo para definir una sola clase de tipo controlador y sus métodos
+ * para desarrollar una acción o un caso de uso, según el analisis del
+ * requerimiento.
+ */
+
+require_once(__DIR__ . \'/../mvc/command/Command.php\');
+require_once(__DIR__ . \'/../model/Model.php\');
+
+/**
+ * Clase controladora ' . ucfirst(strtolower($nameC)) . ' para cargar las vistas iniciales.
+ * 
+ * Esta clase se autogenera con em metodo index por defecto que carga la vista
+ * index de la carpeta views/' . ucfirst(strtolower($nameC)) . '/index.php.
+ * 
+ * @package ' . ucfirst(strtolower($name)) . '
+ * @author Johnny Huamani <jhuamanip@pucp.pe>
+ * @version 1.0
+ */
+class ' . ucwords(strtolower($nameC)) . 'Controller extends mvc_command_Command {
+
+    /**
+     * atributo para guardar la instancia a la clase modelo, donde se tendrá a
+     * metodos con acceso a la BD.
+     * @var object 
+     */
+    private $model;
+
+    /**
+     * Metodo inicializador para cargar las instancias de los atributos.
+     */
+    public function __construct() {
+        $this->model = new Model();
+    }
+
+    /**
+     * Método para cargar la vista por defecto, la vista index en la carpeta
+     * con el mismo nombre del controlador dentro de la carpeta views.
+     * @global array $USER
+     * @return array
+     */
+    public function index() {
+        global $USER;
+        $objUsuario = $this->model->getUser();
+        return array(
+            \'usuario\'=>$USER->firstname,
+            \'controlador\'=>\'' . ucwords(strtolower($nameC)) . '\',
+            \'name_plugin\'=>  get_string(\'pluginname\', \'report_' . $name . '\'),
+            \'objUsuario\'=> $objUsuario
+            ); 
+    }
+}';
+                } else {
+                    if ($default == 'view') {
+                        $returnValue = '<h1>Bievenido <?php echo $usuario ?> al controlador <?php echo $controlador ?> del plugin <?php echo $name_plugin ?></h1>
+
+<?php
+print_object($objUsuario);
+?> ';
+                    }
+                }
+                break;
         }
         return $returnValue;
     }
@@ -1187,5 +1252,35 @@ class Model {
         }
         return $returnValue;
     }
+    
+    public function generateController($param) {
+        $returnValue = FALSE;
+        $param[3] = 'report';
+        umask(0);
+        $pathPlugin = getcwd() . '/' . $param[3] . '/' . $param[4] . '/controllers/';
+        $pathPluginView = getcwd() . '/' . $param[3] . '/' . $param[4] . '/views/';
+        if (file_exists($pathPlugin)) {
+            //verificamos si el controlador ya existe
+            $file = $pathPlugin . ucwords(strtolower($param[5])) . 'Controller.php';
+            $folderView = $pathPluginView . ucwords(strtolower($param[5])) . '/';
+            $fileView = $pathPluginView . ucwords(strtolower($param[5])) . '/index.php';
+            if (!file_exists($file) && !file_exists($folderView) && !file_exists($fileView)) {
+                //creamos el archivo controladora
+                $myfile = fopen($file, "w") or die("Unable to open file!");
+                $txt = $this->getContentFile($pathPlugin, $file, $param[4], 'controller', $param[5]);
+                fwrite($myfile, $txt);
+                fclose($myfile);
+                //creamos su vista index por defecto
+                mkdir($folderView);
+                //creamos el archivo de la vista del nuevo controlador
+                $myfileView = fopen($fileView, "w") or die("Unable to open file!");
+                $txtView = $this->getContentFile($pathPlugin, $fileView, $param[4], 'view', $param[5]);
+                fwrite($myfileView, $txtView);
+                fclose($myfileView);
+                $returnValue = TRUE;
+            }
+        }
+        return $returnValue;
+    }    
 
 }
