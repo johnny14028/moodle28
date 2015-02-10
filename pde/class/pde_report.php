@@ -52,6 +52,36 @@ class pde_report {
         $returnValue = '';
         switch ($file) {
             case $pathPackage . '/index.php':
+                $returnValue = '<?php
+
+require(\'../../config.php\');
+require_once(\'mvc/controller/Controller.php\');
+defined(\'MOODLE_INTERNAL\') || die;
+
+
+$course = $DB->get_record(\'course\', array(\'id\'=>\'\'.SITEID));
+
+require_login($course);
+
+if (isset($_SERVER[\'HTTP_X_REQUESTED_WITH\'])
+        AND strtolower($_SERVER[\'HTTP_X_REQUESTED_WITH\']) === \'xmlhttprequest\') {
+    mvc_controller_Controller::run();
+} else {
+    $url = new moodle_url(\'/report/'.$name.'/index.php\', array());
+    $PAGE->set_context(context_system::instance());
+
+$PAGE->set_url($url);
+$PAGE->set_pagelayout(\'report\');
+
+$PAGE->set_title(get_string(\'pluginname\',\'report_'.$name.'\'));
+$PAGE->set_heading(get_string(\'pluginname\',\'report_'.$name.'\'));    
+
+    $PAGE->requires->js(\'/report/'.$name.'/js/jquery.js\');
+    $PAGE->requires->js(\'/report/'.$name.'/js/'.$name.'.js\');
+    echo $OUTPUT->header();
+    mvc_controller_Controller::run();
+    echo $OUTPUT->footer();
+}';
                 break;
             case $pathPackage . '/version.php':
                 $returnValue = '<?php
@@ -90,26 +120,168 @@ $plugin->requires = 2010021900;
 $plugin->dependencies = array();
 ';
                 break;
+            case $pathPackage . '/lang/en/report_' . $name . '.php';
+                $returnValue = '<?php
+
+$string[\'hello\'] = \'Hi {$a}\';
+$string[\'' . $name . ':templatecapability\'] = \'Some capabiities\';
+$string[\'pluginname\'] = \'Plugin report ' . $name . '\';';
+                break;
+            case $pathPackage . '/lang/es/report_' . $name . '.php';
+                $returnValue = '<?php
+
+$string[\'hello\'] = \'Hola {$a}\';
+$string[\'' . $name . ':templatecapability\'] = \'Alguna capacidad\';
+$string[\'pluginname\'] = \'Plugin report ' . $name . '\';';
+                break;
+            case $pathPackage . '/db/access.php':
+                $returnValue = '<?php
+
+defined(\'MOODLE_INTERNAL\') || die();
+
+$capabilities = array(
+
+    \'report/' . $name . ':view\' => array(
+        \'riskbitmask\' => RISK_PERSONAL,
+        \'captype\' => \'read\',
+        \'contextlevel\' => CONTEXT_COURSE,
+        \'archetypes\' => array(
+            \'teacher\' => CAP_ALLOW,
+            \'editingteacher\' => CAP_ALLOW,
+            \'manager\' => CAP_ALLOW,
+            \'student\' => CAP_ALLOW,
+            \'user\' => CAP_ALLOW,
+        ),
+    )
+);';
+                break;
+            case $pathPackage . '/db/install.php':
+                $returnValue = '<?php
+
+function xmldb_report_' . $name . '_install(){
+}';
+                break;
+            case $pathPackage . 'settings.php':
+                $returnValue = '<?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Links and settings
+ *
+ * Contains settings used by logs report.
+ *
+ * @package    report_' . $name . '
+ * @copyright  1999 onwards Martin Dougiamas (http://dougiamas.com)
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+defined(\'MOODLE_INTERNAL\') || die;
+
+// just a link to course report
+$ADMIN->add(\'reports\', new admin_externalpage(\'report' . $name . '\', get_string(\'pluginname\', \'report_' . $name . '\'), "$CFG->wwwroot/report/' . $name . '/index.php", \'report/' . $name . 'l:view\'));
+
+// no report settings
+$settings = null;
+';
+                break;
+            case $pathPackage . '/phpdoc.xml':
+                $returnValue = '<?xml version="1.0" encoding="UTF-8"?>
+<phpdoc>
+    <title>Plugin ' . ucfirst(strtolower($name)) . '</title>
+    <parser>
+        <default-package-name>' . ucfirst(strtolower($name)) . '</default-package-name>
+        <target>../../output/report/' . $name . '</target>
+        <extensions>
+            <extension>php</extension>
+        </extensions>        
+    </parser>
+    <transformer>
+        <target>../../output/report/' . $name . '</target>
+    </transformer>
+    <files>
+        <directory>.</directory>
+    </files>
+</phpdoc>';
+                break;
+            case $pathPackage . '/README.txt':
+                $returnValue = 'PHP Documentor
+./../../vendor/bin/phpdoc --cache-folder="../../../phpdoccache/report/' . $name . '"
+
+Good luck!';
+                break;
+            case $pathPackage . '/controllers/DefaultController.php':
+                $returnValue = '<?php
+/**
+ * Archivo para definir una sola clase de tipo controlador y sus métodos
+ * para desarrollar una acción o un caso de uso, según el analisis del
+ * requerimiento.
+ */
+
+require_once(__DIR__ . \'/../mvc/command/Command.php\');
+require_once(__DIR__ . \'/../model/Model.php\');
+
+/**
+ * Clase controladora Default para cargar las vistas iniciales.
+ * 
+ * Esta clase se autogenera con em metodo index por defecto que carga la vista
+ * index de la carpeta views/Default/index.php.
+ * 
+ * @package ' . ucfirst(strtolower($name)) . '
+ * @author Johnny Huamani <jhuamanip@pucp.pe>
+ * @version 1.0
+ */
+class DefaultController extends mvc_command_Command {
+
+    /**
+     * atributo para guardar la instancia a la clase modelo, donde se tendrá a
+     * metodos con acceso a la BD.
+     * @var object 
+     */
+    private $model;
+
+    /**
+     * Metodo inicializador para cargar las instancias de los atributos.
+     */
+    public function __construct() {
+        $this->model = new Model();
+    }
+
+    /**
+     * Método para cargar la vista por defecto, la vista index en la carpeta
+     * con el mismo nombre del controlador dentro de la carpeta views.
+     * @global array $USER
+     * @return array
+     */
+    public function index() {
+        global $USER;
+        $objUsuario = $this->model->getUser();
+        return array(
+            \'usuario\' => $USER->firstname,
+            \'name_plugin\' => get_string(\'pluginname\', \'report_' . $name . '\'),
+            \'objUsuario\' => $objUsuario
+        );
+    }
+}';
+                break;
             case $pathPackage . '/views/Default/index.php':
                 $returnValue = '<h1>Bievenido <?php echo $usuario ?> al <?php echo $name_plugin ?></h1>
 
 <?php
 print_object($objUsuario);
 ?> ';
-                break;
-            case $pathPackage . '/mvc/base/Registry.php':
-                $returnValue = '<?php
-
-abstract class mvc_base_Registry {
-
-    public function __construct() {
-        
-    }
-
-    protected abstract function get($key);
-
-    protected abstract function set($key, $value);
-}';
                 break;
             case $pathPackage . '/mvc/base/Registry.php':
                 $returnValue = '<?php
@@ -302,7 +474,7 @@ class mvc_base_SessionRegistry extends mvc_base_Registry {
      */
     public static function getSession() {
         $returnValue = NULL;
-        $returnValue = self::instance()->get(\''.$name.'\');
+        $returnValue = self::instance()->get(\'' . $name . '\');
         return $returnValue;
     }
 
@@ -311,7 +483,7 @@ class mvc_base_SessionRegistry extends mvc_base_Registry {
      * @param mvc_controller_Session $objSession
      */
     public static function setSession(mvc_controller_Session $objSession) {
-        self::instance()->set(\''.$name.'\', $objSession);
+        self::instance()->set(\'' . $name . '\', $objSession);
     }
 
 }';
@@ -646,7 +818,7 @@ class mvc_command_DefaultCommand extends mvc_command_Command {
 
 }';
                 break;
-            case  $pathPackage . '/mvc/controller/Controller.php':
+            case $pathPackage . '/mvc/controller/Controller.php':
                 $returnValue = '<?php
 
 /**
@@ -955,6 +1127,8 @@ class Model {
         $returnValue = array();
         array_push($returnValue, $pathPackage . '/index.php');
         array_push($returnValue, $pathPackage . '/version.php');
+        array_push($returnValue, $pathPackage . '/README.txt');
+        array_push($returnValue, $pathPackage . '/phpdoc.xml');
         array_push($returnValue, $pathPackage . '/controllers/DefaultController.php');
         array_push($returnValue, $pathPackage . '/db/install.php');
         array_push($returnValue, $pathPackage . '/db/access.php');
@@ -962,8 +1136,8 @@ class Model {
         array_push($returnValue, $pathPackage . '/js/' . $name . '.js');
         array_push($returnValue, $pathPackage . '/js/jquery.js');
         array_push($returnValue, $pathPackage . '/css/' . $name . '.css');
-        array_push($returnValue, $pathPackage . '/lang/es/' . $name . '.php');
-        array_push($returnValue, $pathPackage . '/lang/en/' . $name . '.php');
+        array_push($returnValue, $pathPackage . '/lang/es/report_' . $name . '.php');
+        array_push($returnValue, $pathPackage . '/lang/en/report_' . $name . '.php');
         array_push($returnValue, $pathPackage . '/mvc/base/Registry.php');
         array_push($returnValue, $pathPackage . '/mvc/base/RequestRegistry.php');
         array_push($returnValue, $pathPackage . '/mvc/base/SessionRegistry.php');
