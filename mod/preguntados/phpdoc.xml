@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpdoc>
+    <title>Plugin Preguntados</title>
+    <parser>
+        <default-package-name>Preguntados</default-package-name>
+        <target>../../output/module/preguntados</target>
+        <extensions>
+            <extension>php</extension>
+        </extensions>        
+    </parser>
+    <transformer>
+        <target>../../output/module/preguntados</target>
+    </transformer>
+    <files>
+        <directory>.</directory>
+    </files>
+</phpdoc>
