@@ -1,0 +1,576 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<juego>
+	<config total="50">
+		<n1_preg_total><![CDATA[6,7,7,12,7,7,4]]></n1_preg_total>	
+		<n1_preg_tomar><![CDATA[2,3,1,2,3,2,3]]></n1_preg_tomar>	
+		<n2_preg_total><![CDATA[5,13,4]]></n2_preg_total>	
+		<n2_preg_tomar><![CDATA[3,3,2]]></n2_preg_tomar>	
+	</config>
+	
+	<comodin id="c" OK="0">		
+			<enunciado><![CDATA[Sobre la Campaña “Cuenta Ganadora”, indica el tiempo mínimo que el cliente deberá de mantener los fondos en la cuenta para acceder al premio de apertura:]]></enunciado>
+			<respuesta idR="0"><![CDATA[90 días]]></respuesta>	
+			<respuesta idR="1"><![CDATA[60 días]]></respuesta>	
+			<respuesta idR="2"><![CDATA[45 días]]></respuesta>	
+			<respuesta idR="3"><![CDATA[30 días]]></respuesta>	
+	</comodin>	
+
+	<preguntas>
+		<pregunta id="0" OK="0">		
+			<enunciado><![CDATA[Sobre la Campaña “Cuenta Ganadora”, indica el tiempo mínimo que el cliente deberá de mantener los fondos en la cuenta para acceder al premio de apertura:]]></enunciado>
+			<respuesta idR="0"><![CDATA[90 días]]></respuesta>	
+			<respuesta idR="1"><![CDATA[60 días]]></respuesta>	
+			<respuesta idR="2"><![CDATA[45 días]]></respuesta>	
+			<respuesta idR="3"><![CDATA[30 días]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="1" OK="0">		
+			<enunciado><![CDATA[Sobre la Campaña “Cuenta Ganadora”, indica si el siguiente enunciado es verdadero o falso:”Si el cliente, luego de canjeado el premio, desea cancelar o retirar sus fondos antes de los 90 días, se le deberá cargar una penalidad por el importe de S/.336 ó US$ 130 en el momento de la liquidación”.]]></enunciado>
+			<respuesta idR="0"><![CDATA[VERDADERO]]></respuesta>	
+			<respuesta idR="1"><![CDATA[FALSO]]></respuesta>	
+		</pregunta>		
+		
+		<pregunta id="2" OK="1">
+			<enunciado><![CDATA[Sobre los detalles del premio de apertura de la Campaña “Cuenta Ganadora”, indica cuál de los siguientes enunciados es el CORRECTO:]]></enunciado>
+			<respuesta idR="0"><![CDATA[Máximo se entregará 2 premios por cliente y/o cuenta]]></respuesta>	
+			<respuesta idR="1"><![CDATA[Oferta válida únicamente para dinero nuevo a excepción de dinero que provenga del Pago de Haberes]]></respuesta>	
+			<respuesta idR="2"><![CDATA[El cliente podrá devolver el premio únicamente hasta los 4 días hábiles siguientes de haberlo recibido]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="3" OK="0">		
+			<enunciado><![CDATA[Sobre la Campaña “Cuenta Ganadora”, indica si el siguiente enunciado es verdadero o falso: “El saldo de la Cuenta Ganadora está asegurado por el Fondo de Seguro de Depósito el cual, para el periodo Diciembre – Febrero 2012, es de hasta S/.91,621”. ]]></enunciado>
+			<respuesta idR="0"><![CDATA[VERDADERO]]></respuesta>	
+			<respuesta idR="1"><![CDATA[FALSO]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="4" OK="0">		
+			<enunciado><![CDATA[El sorteo de la campaña de la “Cuenta Ganadora” de 1000 MiniBares Whirlpool Retro + 1 cena Especial para 1 ganador y 5 acompañantes, aplica para las cuentas nuevas y antiguas que se encuentren activas al 31 de Marzo del 2012 y cuyo saldo medio en dicho mes sea igual o mayor a $500 ó S/.1,500.]]></enunciado>
+			<respuesta idR="0"><![CDATA[VERDADERO]]></respuesta>	
+			<respuesta idR="1"><![CDATA[FALSO]]></respuesta>	
+		</pregunta>	
+			
+		<pregunta id="5" OK="0">		
+			<enunciado><![CDATA[En los sorteos de la campaña de la “Cuenta Ganadora” de 1000 MiniBares Whirlpool Retro + 1 cena Especial para 1 ganador y 5 acompañantes, los clientes VIP y de Mundo Sueldo duplican sus opciones.]]></enunciado>
+			<respuesta idR="0"><![CDATA[VERDADERO]]></respuesta>	
+			<respuesta idR="1"><![CDATA[FALSO]]></respuesta>	
+		</pregunta>
+				
+		<pregunta id="6" OK="2">		
+			<enunciado><![CDATA[Para la campaña Cuenta Ganadora ¿Cuáles son los documentos claves para entregar un premio al cliente? Marca la opción correcta.]]></enunciado>
+			<respuesta idR="0"><![CDATA[Sólo el acta de entrega y copia del DNI]]></respuesta>	
+			<respuesta idR="1"><![CDATA[Sólo la transferencia Gratuita y copia del DNI]]></respuesta>	
+			<respuesta idR="2"><![CDATA[Sólo el acta de entrega, Transferencia Gratuita y copia del DNI]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="7" OK="3">		
+			<enunciado><![CDATA[El Cliente Ángel Pérez abre una Cuenta Ganadora en la cual deposita S/.20,000 y solicita su “Premio de apertura” correspondiente. ¿Cuál es el monto de la retención que debes hacerle?]]></enunciado>
+			<respuesta idR="0"><![CDATA[20000]]></respuesta>	
+			<respuesta idR="1"><![CDATA[10000]]></respuesta>	
+			<respuesta idR="2"><![CDATA[7500]]></respuesta>	
+			<respuesta idR="3"><![CDATA[5000]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="8" OK="0">		
+			<enunciado><![CDATA[El Cliente Manuel Pérez abre una Cuenta Ganadora en la cual deposita S/.20,000 ¿Cuántos “Premios de Apertura” le corresponden?]]></enunciado>
+			<respuesta idR="0"><![CDATA[1 Premio]]></respuesta>	
+			<respuesta idR="1"><![CDATA[2 Premios]]></respuesta>	
+			<respuesta idR="2"><![CDATA[3 Premios]]></respuesta>	
+			<respuesta idR="3"><![CDATA[4 Premios]]></respuesta>	
+		</pregunta>	
+			
+<!-- 		<pregunta id="9" OK="2">		
+			<enunciado><![CDATA[Un cliente del segmento VIP del Banco con Cuenta Ganadora, tiene el mes anterior al sorteo un saldo promedio mensual de S/. 2,500 y realiza un depósito adicional de S/.3,000. ¿cuántas opciones tiene este cliente para el sorteo?]]></enunciado>
+			<respuesta idR="0"><![CDATA[1 Opción]]></respuesta>	
+			<respuesta idR="1"><![CDATA[1.5 Opciones]]></respuesta>	
+			<respuesta idR="2"><![CDATA[2 opciones]]></respuesta>	
+			<respuesta idR="3"><![CDATA[3 opciones]]></respuesta>	
+		</pregunta>		 -->
+
+		
+<!-- Segundo Nivel -->
+
+<!-- 
+		<pregunta id="10" OK="3">		
+			<enunciado><![CDATA[Un cliente que recibió información de la Campaña Volvió Cambio +, hace una compra de dólares a través del Cajero automático, por la suma de US$40.00, ¿a cuánto asciende el premio que podría ganar nuestro cliente?]]></enunciado>
+			<respuesta idR="0"><![CDATA[20]]></respuesta>	
+			<respuesta idR="1"><![CDATA[50]]></respuesta>	
+			<respuesta idR="2"><![CDATA[100]]></respuesta>	
+			<respuesta idR="3"><![CDATA[No gana premio]]></respuesta>		
+		</pregunta>		
+
+		<pregunta id="11" OK="2">		<enunciado><![CDATA[Para los ganadores del sorteo en línea (Operaciones en ventanilla) de la campaña VOLVIÓ CAMBIO +, seleccione cuál es la modalidad de entrega del premio.]]></enunciado>
+			<respuesta idR="0"><![CDATA[En la oficina de la sede central del BBVA presentando su DNI.]]></respuesta>	
+			<respuesta idR="1"><![CDATA[Al día siguiente en la oficina dónde aperturó la cuenta y dónde hizo la transacción.]]></respuesta>	
+			<respuesta idR="2"><![CDATA[El premio se entregará en efectivo y al instante en la oficina donde se realizó la operación.]]></respuesta>
+		</pregunta>		
+
+		<pregunta id="12" OK="0">		
+			<enunciado><![CDATA[Sobre la campaña “Volvió cambio+: Los clientes que realicen operaciones de compra – venta de dólares a través de Banca Express (Banca por teléfono, Banca por internet y Cajero automático), acceden a un sorteo único que se realizará el 25 de Mayo de 2012. ¿Verdadero o Falso?]]></enunciado>
+			<respuesta idR="0"><![CDATA[VERDADERO]]></respuesta>	
+			<respuesta idR="1"><![CDATA[FALSO]]></respuesta>		
+		</pregunta>		
+
+		<pregunta id="13" OK="1">		
+			<enunciado><![CDATA[Marque si es Verdadero o Falso el siguiente enunciado respecto a la Campaña Volvió Cambio +: "Los clientes que realicen operaciones de compra – venta de Dólares por Banca Express, por un monto mayor a US$ 1,000.00 podrían hacerse acreedores de un premio de S/.2,000"]]></enunciado>
+			<respuesta idR="0"><![CDATA[VERDADERO]]></respuesta>	
+			<respuesta idR="1"><![CDATA[FALSO]]></respuesta>					
+		</pregunta>		
+
+		<pregunta id="14" OK="0">		
+			<enunciado><![CDATA[Sobre la campaña Volvió cambio+: "A los clientes que resulten ganadores del sorteo único, por haber realizado operaciones de compra – venta de dólares a través de Banca Express, se les hará entrega del premio a través de abono en la cuenta de cargo de la operación". ¿Verdadero o Falso?]]></enunciado>
+			<respuesta idR="0"><![CDATA[VERDADERO]]></respuesta>	
+			<respuesta idR="1"><![CDATA[FALSO]]></respuesta>					
+		</pregunta>		
+
+
+		<pregunta id="15" OK="0">		
+			<enunciado><![CDATA[Sobre el Préstamo Flexible indica si es verdadero o falso el siguiente enunciado: Al acceder a uno de los beneficios Cuota Comodín o Cambio de Fecha de Pago, el cliente podrá acceder nuevamente a cualquiera de estos 6 meses después del último cambio que haya realizado.]]></enunciado>
+			<respuesta idR="0"><![CDATA[VERDADERO]]></respuesta>	
+			<respuesta idR="1"><![CDATA[FALSO]]></respuesta>					
+		</pregunta>		
+
+		<pregunta id="16" OK="0">		
+			<enunciado><![CDATA[Seleccióna la opción correcta que completaría la siguiente oración: Un cliente con un préstamo flexible puede acceder a la activación de la cuota comodín _________________]]></enunciado>
+			<respuesta idR="0"><![CDATA[Posterior al pago de la 3era cuota]]></respuesta>	
+			<respuesta idR="1"><![CDATA[Al día siguiente del desembolso]]></respuesta>	
+			<respuesta idR="2"><![CDATA[Al décimo tercer (13°) mes]]></respuesta>					
+		</pregunta>		
+
+		<pregunta id="17" OK="1">		
+			<enunciado><![CDATA[Un cliente desea financiamiento para comprar la lista de útiles de sus 4 hijos, necesita S/. 3,000 ¿a este cliente puedes ofrecerle nuestro préstamo flexible?]]></enunciado>
+			<respuesta idR="0"><![CDATA[No, es muy poca la cantidad que solicita, el monto mínimo es de S/.5,000.]]></respuesta>	
+			<respuesta idR="1"><![CDATA[Sí, ya que el monto mínimo de financiamiento es S/. 1,000.]]></respuesta>					
+		</pregunta>		
+
+		<pregunta id="18" OK="3">		
+			<enunciado><![CDATA[¿Quién ejecuta el desembolso de un préstamo flexible para una oficina de Lima y provincia? Selecciona la opción correcta.]]></enunciado>
+			<respuesta idR="0"><![CDATA[CAS]]></respuesta>	
+			<respuesta idR="1"><![CDATA[CPM]]></respuesta>	
+			<respuesta idR="2"><![CDATA[Riesgos]]></respuesta>	
+			<respuesta idR="3"><![CDATA[La misma oficina]]></respuesta>					
+		</pregunta>		
+
+		<pregunta id="19" OK="1">		
+			<enunciado><![CDATA[¿Cuáles son los requisitos para acceder a un préstamo flexible? Selecciona la opción correcta:]]></enunciado>
+			<respuesta idR="0"><![CDATA[Ingresos netos mínimos desde S/. 1000, edad máxima 75 años, continuidad laboral de 1 año.]]></respuesta>	
+			<respuesta idR="1"><![CDATA[Ingresos netos mínimos desde S/. 1000, edad máxima 75 años, continuidad laboral de 6 meses.]]></respuesta>	
+			<respuesta idR="2"><![CDATA[Ingresos netos mínimos desde S/. 1500, edad máxima 75 años, continuidad laboral de 1 meses.]]></respuesta>	
+		</pregunta>		
+
+
+
+
+		<pregunta id="20" OK="0">		
+			<enunciado><![CDATA[Respecto a la modalidad de pago a cuenta – pago mínimo / cuota mensual de la Tarjeta Capital de Trabajo, indica si el siguiente enunciado es Verdadero o Falso: Los pagos a cuenta aplican siempre y cuando cubran el importe total de cada una de las cuotas como pagos exactos. En caso el importe no cubra el valor de la cuota, este quedará como saldo acreedor en la Tarjeta Capital de Trabajo para el pago de la siguiente cuota.]]></enunciado>
+			<respuesta idR="0"><![CDATA[VERDADERO]]></respuesta>	
+			<respuesta idR="1"><![CDATA[FALSO]]></respuesta>					
+		</pregunta>		
+
+		<pregunta id="21" OK="0">		
+			<enunciado><![CDATA[Cuando el cliente quiere amortizar la deuda de su Tarjeta Capital de Trabajo, el Asesor de Servicio visualizará una pantalla informativa que detalla de la siguiente manera cómo se aplicará el importe que se va amortizar:
+			1. Aplica a los intereses corridos desde la última fecha de pago hasta  la fecha de la operación por la deuda.
+			2. Aplica al ITF
+			3. Aplica al capital total de la deuda
+			¿Verdadero o Falso?]]></enunciado>
+			<respuesta idR="0"><![CDATA[VERDADERO]]></respuesta>	
+			<respuesta idR="1"><![CDATA[FALSO]]></respuesta>				
+		</pregunta>		
+
+		<pregunta id="22" OK="0">		
+			<enunciado><![CDATA[Respecto a la modalidad de pago: amortización - sistema de cuotas de la tarjeta capital de trabajo, indica si el siguiente enunciado es ¿Verdadero o Falso? La amortización aplica primero a las operaciones (consumos y/o disposiciones de efectivo) que cuentan con el mayor plazo pendientes de pago; es decir, con el mayor número de cuotas pendientes.]]></enunciado>
+			<respuesta idR="0"><![CDATA[VERDADERO]]></respuesta>	
+			<respuesta idR="1"><![CDATA[FALSO]]></respuesta>					
+		</pregunta>		
+
+		<pregunta id="23" OK="2">		
+			<enunciado><![CDATA[Si un cliente viene a pagar su Tarjeta Capital de Trabajo con S/.20,000. siendo la cuota pendiente de pago de ese mes sólo S/.5,000. ¿Qué operación realizas con los S/.15,000 restantes? Sabiendo que el cliente desea amortizar la deuda y por lo tanto los intereses. Marca la alternativa correcta:]]></enunciado>
+			<respuesta idR="0"><![CDATA[Escojo la opción “Pago a Cuenta” al igual como se hace para las tarjetas de crédito de persona natural.]]></respuesta>	
+			<respuesta idR="1"><![CDATA[Escojo la opción “Pago Adelantado de Cuotas”, donde sólo reduzco los interés de cada una las cuotas que se van adelantar.]]></respuesta>	
+			<respuesta idR="2"><![CDATA[Escojo la transacción “Amortización Sistema de Cuotas” y rebajo directamente el capital de la deuda e intereses.]]></respuesta>					
+		</pregunta>		
+
+
+
+		<pregunta id="24" OK="3">		
+			<enunciado><![CDATA[El siguiente enunciado es la definición de un seguro no vinculado que ofrece el BBVA Continental, al respecto, marca a qué seguro corresponde.“Seguro que ofrece protección en caso de robo y/o asalto con violencia, que ocasione la pérdida de parte o la totalidad del valor del efectivo retirado desde las ventanillas del BBVA Continental hasta S/. 3,500 o su equivalente en dólares o euros al tipo de cambio del día.”  ]]></enunciado>
+			<respuesta idR="0"><![CDATA[Protección de Tarjeta.]]></respuesta>	
+			<respuesta idR="1"><![CDATA[Múlti Seguro.]]></respuesta>	
+			<respuesta idR="2"><![CDATA[Múltiple]]></respuesta>	
+			<respuesta idR="3"><![CDATA[Retiro Seguro.]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="25" OK="2">		
+			<enunciado><![CDATA[El Sr. Fernández está en la  oficina Callao, retira de ventanilla S/. 4,000 y paga la prima del seguro RETIRO SEGURO. Dentro del mismo banco el Sr. Fernández entrega el dinero a su empleado para que pague una factura, el empleado se retira del banco con el dinero para ir directamente a la oficina del proveedor para pagar la factura. Lamentablemente a una cuadra del banco al empleado lo golpean y le roban la totalidad del dinero. Haciendo uso solo de la información descrita, ¿Qué importe cubre el seguro Retiro Seguro?]]></enunciado>
+			<respuesta idR="0"><![CDATA[4000]]></respuesta>	
+			<respuesta idR="1"><![CDATA[3500]]></respuesta>	
+			<respuesta idR="2"><![CDATA[No cubre]]></respuesta>	
+			<respuesta idR="3"><![CDATA[2000]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="26" OK="1">		
+			<enunciado><![CDATA[En relación al seguro: RETIRO SEGURO, marca la opción Falsa.]]></enunciado>
+			<respuesta idR="0"><![CDATA[La suma asegurada máxima es S/. 3,500.00 o su equivalente en dólares o euros.]]></respuesta>	
+			<respuesta idR="1"><![CDATA[Para tomar el seguro es requisito ser cliente del BBVA Continental.]]></respuesta>	
+			<respuesta idR="2"><![CDATA[El seguro no cubre si el robo ocurre previo a la compra del seguro.]]></respuesta>	
+			<respuesta idR="3"><![CDATA[Edad mínima de ingreso : 18 años]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="27" OK="0">		
+			<enunciado><![CDATA[El siguiente enunciado es una característica del Seguro RETIRO SEGURO. Verdadero o Falso? - Reintegra el 100% de la suma asegurada, no tiene franquicia ni deducible.]]></enunciado>
+			<respuesta idR="0"><![CDATA[VERDADERO]]></respuesta>	
+			<respuesta idR="1"><![CDATA[FALSO]]></respuesta>			
+		</pregunta>		
+
+		<pregunta id="28" OK="2">		
+			<enunciado><![CDATA[Un cliente realiza un retiro de efectivo por ventanilla por S/. 4,500 y paga por dicha operación la prima del seguro RETIRO SEGURO e inmediatamente se retira de la oficina. Después de 1 hora, el cliente sufre un robo del total del efectivo, por lo cual realiza una denuncia policial.	Haciendo uso solo de la información descrita, ¿Qué importe le cubre el seguro?]]></enunciado>
+			<respuesta idR="0"><![CDATA[ No cubre]]></respuesta>	
+			<respuesta idR="1"><![CDATA[4500]]></respuesta>	
+			<respuesta idR="2"><![CDATA[3500]]></respuesta>	
+			<respuesta idR="3"><![CDATA[2500]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="29" OK="3">		
+			<enunciado><![CDATA[Indica en cuál de las siguientes circunstancias, el seguro “RETIRO SEGURO”, cubre la pérdida de efectivo:]]></enunciado>
+			<respuesta idR="0"><![CDATA[Si el robo de efectivo, ocurre luego de 3 horas de la contratación del Retiro Seguro y el retiro de efectivo en ventanilla de BBVA]]></respuesta>	
+			<respuesta idR="1"><![CDATA[Cuando el cliente sufre un robo de efectivo luego de haber efectuado un retiro en un cajero automático del BBVA Continental.]]></respuesta>	
+			<respuesta idR="2"><![CDATA[Cuando el cliente sufre el robo de su pasaporte y tarjetas de crédito del BBVA Continental.]]></respuesta>	
+			<respuesta idR="3"><![CDATA[Si el robo ocurre luego de 1 hora de haber comprado el Retiro Seguro y retirado S/. 2,000 de ventanilla.]]></respuesta>	
+		</pregunta>
+
+		<pregunta id="30" OK="0">		
+			<enunciado><![CDATA[Indica si es Verdadero o Falso el siguiente enunciado sobre el producto RETIRO SEGURO: “Ofrece protección en caso de robo y/o asalto con violencia, que ocasione la pérdida de parte o la totalidad del valor del efectivo retirado desde las ventanillas del BBVA Continental”]]></enunciado>
+			<respuesta idR="0"><![CDATA[VERDADERO]]></respuesta>	
+			<respuesta idR="1"><![CDATA[FALSO]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="31" OK="2">		
+			<enunciado><![CDATA[En relación al seguro RETIRO SEGURO, marca la opción Verdadera]]></enunciado>
+			<respuesta idR="0"><![CDATA[Seguro exclusivamente dirigido solo a no clientes de BBVA Continental.]]></respuesta>	
+			<respuesta idR="1"><![CDATA[Tiene un deducible de S/. 150]]></respuesta>	
+			<respuesta idR="2"><![CDATA[No cubre si el robo ocurre previo a la compra del seguro.]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="32" OK="1">		
+			<enunciado><![CDATA[Respecto a las características del seguro RETIRO SEGURO. Indica la opción CORRECTA:]]></enunciado>
+			<respuesta idR="0"><![CDATA[El seguro cubre hasta 5 eventos de pérdida al año.]]></respuesta>	
+			<respuesta idR="1"><![CDATA[La cobertura máxima del seguro es de S/. 3,500.]]></respuesta>	
+			<respuesta idR="2"><![CDATA[El seguro tiene un deducible de S/. 100.00]]></respuesta>	
+			<respuesta idR="3"><![CDATA[Seguro dirigido exclusivamente a clientes del BBVA Continental.]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="33" OK="2">		
+			<enunciado><![CDATA[Respecto a las características del seguro RETIRO SEGURO. Verifica si es Verdadero o Falso cada una de los siguientes enunciados y marca la opción que tenga la combinación correcta:
+			- Cubre retiros de efectivo realizados en ventanillas del BBVA Continental.
+			- Reintegra el 80% de la suma asegurada.
+			- Cubre retiros de efectivo realizados en cajeros automáticos del BBVA Continental.
+			- Edad mínima de ingreso: 20 años.]]></enunciado>
+			<respuesta idR="0"><![CDATA[VVVV]]></respuesta>	
+			<respuesta idR="1"><![CDATA[VFVV]]></respuesta>	
+			<respuesta idR="2"><![CDATA[VFFF]]></respuesta>	
+			<respuesta idR="3"><![CDATA[FVFV]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="34" OK="2">		
+			<enunciado><![CDATA[En relación al seguro RETIRO SEGURO, marca la opción Verdadera]]></enunciado>
+			<respuesta idR="0"><![CDATA[Reintegra el 90% de la suma asegurada.]]></respuesta>	
+			<respuesta idR="1"><![CDATA[Seguro exclusivamente dirigido a clientes de BBVA Continental.]]></respuesta>	
+			<respuesta idR="2"><![CDATA[Seguro no tiene franquicia ni deducible.]]></respuesta>	
+			<respuesta idR="3"><![CDATA[Edad mínima de ingreso: 21 años]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="35" OK="2">		
+			<enunciado><![CDATA[Respecto a las características del seguro RETIRO SEGURO. Indica la opción CORRECTA:]]></enunciado>
+			<respuesta idR="0"><![CDATA[El seguro tiene un deducible de S/. 150.00]]></respuesta>	
+			<respuesta idR="1"><![CDATA[El seguro cubre hasta 4 eventos de pérdida al año.]]></respuesta>	
+			<respuesta idR="2"><![CDATA[La cobertura máxima del seguro es de S/. 3,500.]]></respuesta>	
+			<respuesta idR="3"><![CDATA[Puede ser adquirido solo por clientes del BBVA Continental.]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="36" OK="1">		
+			<enunciado><![CDATA[Respecto a las características del seguro RETIRO SEGURO. Verifica si es Verdadero o Falso cada una de los siguientes enunciados y marca la opción que tenga la combinación correcta:
+			- Solo cubre retiros de efectivo, realizados en cajeros automáticos.
+			- Suma máxima asegurada S/. 3,500.
+			- No tiene deducible.
+			- Edad mínima de ingreso 18 años.]]></enunciado>
+			<respuesta idR="0"><![CDATA[VVVV.]]></respuesta>	
+			<respuesta idR="1"><![CDATA[FVVV]]></respuesta>	
+			<respuesta idR="2"><![CDATA[FFVV]]></respuesta>	
+			<respuesta idR="3"><![CDATA[FFFV]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="37" OK="2">		
+			<enunciado><![CDATA[Indica cual de las siguientes transacciones, puede realizarse a través del servicio de Banca Móvil:]]></enunciado>
+			<respuesta idR="0"><![CDATA[Pago de servicios públicos (luz, agua, teléfono).]]></respuesta>	
+			<respuesta idR="1"><![CDATA[Pago de tarjetas de crédito del BBVA Continental.]]></respuesta>	
+			<respuesta idR="2"><![CDATA[Recarga de celulares hasta por un límite máximo de S/. 100 (movistar, claro)]]></respuesta>					
+		</pregunta>		
+
+		<pregunta id="38" OK="1">		
+			<enunciado><![CDATA[Identifica cual de los siguientes enunciados es CORRECTO, respecto a las características del servicio de Banca Móvil:]]></enunciado>
+			<respuesta idR="0"><![CDATA[A través de Banca móvil, es posible vincular una cuenta de CTS a una  tarjeta de débito.]]></respuesta>	
+			<respuesta idR="1"><![CDATA[Con el servicio de avisos y alertas, es posible conocer los consumos realizados con las tarjetas de crédito del BBVA Continental.]]></respuesta>	
+			<respuesta idR="2"><![CDATA[El cliente tiene un límite máximo de 30 operaciones mensuales, para  realizar consulta de saldos a través de Banca móvil.]]></respuesta>	
+		</pregunta>		
+
+
+
+		<pregunta id="39" OK="1">		
+			<enunciado><![CDATA[El siguiente enunciado es una cobertura del Plan VIP del Seguro de Protección de tarjetas. Indica si es Verdadero o Falso: Reembolso de gastos de hospitalización a consecuencia del Robo y/o Asalto y/o Secuestro del ASEGURADO con la finalidad de apropiarse de las Tarjetas de Crédito y/o Débito asegurada(s), hasta US$ 300 diarios, máximo 30 días por Asegurado.]]></enunciado>
+			<respuesta idR="0"><![CDATA[VERDADERO]]></respuesta>	
+			<respuesta idR="1"><![CDATA[FALSO]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="40" OK="0">		
+			<enunciado><![CDATA[Con respecto al Seguro de Protección de Tarjetas, ¿Cuáles son las coberturas de los Planes que brinda este Seguro? Marca la alternativa CORRECTA:]]></enunciado>
+			<respuesta idR="0"><![CDATA[Plan VIP cubre las tarjetas del BBVA y tarjetas de Crédito del sistema Financiero y el Plan 1 cubre sólo las tarjetas del BBVA.]]></respuesta>	
+			<respuesta idR="1"><![CDATA[Plan VIP cubre sólo las tarjetas del BBVA y el Plan 1 cubre las tarjetas del BBVA y tarjetas de Crédito del sistema Financiero.]]></respuesta>			
+		</pregunta>		
+
+		<pregunta id="41" OK="0">		
+			<enunciado><![CDATA[Con respecto al Seguro de Protección de Tarjetas Plan 1. Los siguientes enunciados son Verdaderos?
+			- Cubre las tarjetas de crédito del BBVA Continental.
+			- Cobertura de US$ 1,500 (límite agregado anual, máximo 2 eventos por año) por uso forzado por parte del asegurado de la tarjeta de crédito y/o débito en un cajero automático.
+			- Cubre la Muerte accidental a consecuencia de Robo y/o asalto y/o secuestro por US$ 10,000
+			]]></enunciado>
+			<respuesta idR="0"><![CDATA[SI]]></respuesta>	
+			<respuesta idR="1"><![CDATA[NO]]></respuesta>			
+		</pregunta>		
+
+		<pregunta id="42" OK="0">		
+			<enunciado><![CDATA[Indica si el siguiente enunciado corresponde a una EXCLUSIÓN del Seguro de Protección de tarjetas:
+			 “Todo uso indebido de Tarjeta de Crédito y/o Débito del Asegurado cometido  fuera  de los límites de la República del Perú, independientemente del lugar en  el que  se hubiere producido el extravío, robo o hurto”
+			]]></enunciado>
+			<respuesta idR="0"><![CDATA[VERDADERO]]></respuesta>	
+			<respuesta idR="1"><![CDATA[FALSO]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="43" OK="0">		
+			<enunciado><![CDATA[Respecto a las coberturas del Plan VIP del Seguro de Protección de tarjetas. Indica si es Verdadero o Falso, el siguiente enunciado: Reembolso por Trámites de documentos debido a robo y/o asalto y/o secuestro y/o pérdida y/o hurto de los mismos junto con la Tarjeta de crédito(s) y/o Débito, hasta US$ 250 límite agregado anual por ASEGURADO, máximo 2 eventos al año.]]></enunciado>
+			<respuesta idR="0"><![CDATA[VERDADERO]]></respuesta>	
+			<respuesta idR="1"><![CDATA[FALSO]]></respuesta>
+		</pregunta>		
+
+		<pregunta id="44" OK="0">		
+			<enunciado><![CDATA[El siguiente enunciado sobre la cobertura del Plan VIP del Seguro de Protección de tarjetas. ¿Es correcto?
+			- Cobertura de US$1,500 (límite agregado anual) por uso forzado por parte del asegurado de la tarjeta de crédito y/o débito en un cajero automático, máximo 2 eventos al año.]]></enunciado>
+			<respuesta idR="0"><![CDATA[SI]]></respuesta>	
+			<respuesta idR="1"><![CDATA[NO]]></respuesta>				
+		</pregunta>		
+
+		<pregunta id="45" OK="0">		
+			<enunciado><![CDATA[Con respecto al Seguro de Protección de Tarjetas Plan 1. Verifica si es verdadero o falso cada uno de los siguientes enunciados y marca la combinación correcta:
+			- Cubre sólo las tarjetas del BBVA Continental.
+			- Cubre la Muerte accidental a consecuencia de Robo y/o asalto y/o secuestro, por US$ 10,000.
+			- Cobertura de US$ 1,500 (límite agregado anual) por uso forzado por parte del asegurado de la tarjeta de crédito y/o débito en un cajero automático, máximo 2 eventos al año.]]></enunciado>
+			<respuesta idR="0"><![CDATA[VVV]]></respuesta>	
+			<respuesta idR="1"><![CDATA[VVF]]></respuesta>	
+			<respuesta idR="2"><![CDATA[FVF]]></respuesta>	
+			<respuesta idR="3"><![CDATA[Ninguna de las anteriores.]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="46" OK="0">		
+			<enunciado><![CDATA[Indica si el siguiente enunciado corresponde a una EXCLUSIÓN Seguro de Protección de tarjetas:
+			“El hecho que el asegurado esté bajo la influencia del alcohol mayor a los 0.5 grados por litro de sangre, drogas o cualquier narcótico”.
+			]]></enunciado>
+			<respuesta idR="0"><![CDATA[VERDADERO]]></respuesta>	
+			<respuesta idR="1"><![CDATA[FALSO]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="47" OK="1">		
+			<enunciado><![CDATA[¿Cuál es la Prima mensual que el cliente paga por el Seguro de Protección de Tarjetas Plan 1? Marca la opción Correcta:]]></enunciado>
+			<respuesta idR="0"><![CDATA[US$ 3.49]]></respuesta>	
+			<respuesta idR="1"><![CDATA[US$ 1.97]]></respuesta>	
+			<respuesta idR="2"><![CDATA[US$ 2.49]]></respuesta>	
+			<respuesta idR="3"><![CDATA[US$ 5.92]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="48" OK="1">		
+			<enunciado><![CDATA[Respecto a las características del Seguro de Protección de Tarjetas. Verifica si es Verdadero o Falso cada una de los siguientes enunciados y marca la opción que tenga la combinación correcta
+			Los Requisitos para afiliarse al Seguro Protección de Tarjeta son:
+			I. Clientes del Banco con Cuenta de Ahorro, Corriente o Tarjeta de Crédito  vigentes.
+			II. Edad Mínima de ingreso 18 años.
+			III. Edad máxima de ingreso, sin límite.
+			]]></enunciado>
+			<respuesta idR="0"><![CDATA[I y III]]></respuesta>	
+			<respuesta idR="1"><![CDATA[I y II]]></respuesta>	
+			<respuesta idR="2"><![CDATA[I, II y III]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="49" OK="0">		
+			<enunciado><![CDATA[Un cliente con capacidad económica demostrada quiere comprar un auto 0 km que cuesta 20 mil dólares pero sólo tiene 15 mil dólares, ¿la diferencia puede financiarla con un Préstamo Vehicular?]]></enunciado>
+			<respuesta idR="0"><![CDATA[Sí, ya que el monto mínimo de financiamiento es de Mil dólares.]]></respuesta>	
+			<respuesta idR="1"><![CDATA[No, porque se debe financiar el monto total del auto, no aceptamos financiamientos parciales.]]></respuesta>
+		</pregunta>		
+
+		<pregunta id="50" OK="0">		
+			<enunciado><![CDATA[Indica si el siguiente enunciado es verdadero o falso: "Si el cliente realiza un prepago, amortización parcial o cancelación anticipada de las cuotas del préstamo vehicular no se le cobrará ninguna comisión por cancelación anticipada".]]></enunciado>
+			<respuesta idR="0"><![CDATA[VERDADERO]]></respuesta>	
+			<respuesta idR="1"><![CDATA[FALSO]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="51" OK="3">		
+			<enunciado><![CDATA[¿Quién ejecuta el desembolso de un préstamo vehicular para una oficina de provincia? Selecciona la opción correcta.]]></enunciado>
+			<respuesta idR="0"><![CDATA[CAS]]></respuesta>	
+			<respuesta idR="1"><![CDATA[CPM]]></respuesta>	
+			<respuesta idR="2"><![CDATA[Riesgos]]></respuesta>	
+			<respuesta idR="3"><![CDATA[La misma oficina]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="52" OK="2">		
+			<enunciado><![CDATA[¿Cuáles son los ingresos mínimos que tiene que sustentar el cliente para acceder al Préstamo Vehicular?]]></enunciado>
+			<respuesta idR="0"><![CDATA[2500]]></respuesta>	
+			<respuesta idR="1"><![CDATA[2000]]></respuesta>	
+			<respuesta idR="2"><![CDATA[1500]]></respuesta>			
+		</pregunta>		
+
+		<pregunta id="53" OK="2">		
+			<enunciado><![CDATA[Respecto al Préstamo Vehicular, verifica si es Verdadero (V) o Falso (F) cada una de las siguientes opciones y marca la combinación correcta:
+			 - La edad máxima para solicitar el préstamo es de 75 años. 
+			 - El cliente debe sustentar una continuidad laboral de 6 meses mínimo demostrable, sujeto a calificación.
+			 - Este préstamo no aplica para vehículos de uso comercial.]]></enunciado>
+			<respuesta idR="0"><![CDATA[FVF]]></respuesta>	
+			<respuesta idR="1"><![CDATA[FFF]]></respuesta>	
+			<respuesta idR="2"><![CDATA[VVV]]></respuesta>	
+			<respuesta idR="3"><![CDATA[FVV]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="54" OK="1">		
+			<enunciado><![CDATA[Los clientes que poseen un terreno pueden acceder al nuevo Crédito MiVivienda. ¿Verdadero o Falso?]]></enunciado>
+			<respuesta idR="0"><![CDATA[VERDADERO]]></respuesta>	
+			<respuesta idR="1"><![CDATA[FALSO]]></respuesta>		
+		</pregunta>	
+			
+		<pregunta id="55" OK="0">		
+			<enunciado><![CDATA[ Respecto al nuevo crédito MiVivienda ¿El siguiente enunciado, es Verdadero o Falso?
+			Uno de los requisitos es que el solicitante y su esposo (a) o conviviente legalmente reconocido e hijos menores de edad, no deben contar con una vivienda en cualquier localidad del país.]]></enunciado>
+			<respuesta idR="0"><![CDATA[VERDADERO]]></respuesta>	
+			<respuesta idR="1"><![CDATA[FALSO]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="56" OK="0">		
+			<enunciado><![CDATA[El Plazo de financiamiento del nuevo crédito MiVivienda es mínimo 120 meses y máximo 240 meses. ¿Verdadero o Falso?]]></enunciado>
+			<respuesta idR="0"><![CDATA[VERDADERO]]></respuesta>	
+			<respuesta idR="1"><![CDATA[FALSO]]></respuesta>	
+		</pregunta>	
+			
+		<pregunta id="57" OK="0">		
+			<enunciado><![CDATA[El siguiente enunciado, ¿es Verdadero o Falso?
+			Pueden acceder a un préstamo Nuevo MiVivienda quienes hayan heredado una vivienda, siempre y cuando no posea más del 50% de acciones y derechos de la propiedad heredada.]]></enunciado>
+			<respuesta idR="0"><![CDATA[VERDADERO]]></respuesta>	
+			<respuesta idR="1"><![CDATA[FALSO]]></respuesta>	
+		</pregunta>	
+			
+		<pregunta id="58" OK="1">		
+			<enunciado><![CDATA[¿Cuál es la edad máxima de permanencia del nuevo crédito MiVivienda? marca la opción correcta:]]></enunciado>
+			<respuesta idR="0"><![CDATA[85 años]]></respuesta>	
+			<respuesta idR="1"><![CDATA[80 años]]></respuesta>	
+			<respuesta idR="2"><![CDATA[75 años]]></respuesta>	
+			<respuesta idR="3"><![CDATA[70 años]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="59" OK="1">		
+			<enunciado><![CDATA[Los clientes que poseen un Local Comercial no pueden acceder al nuevo Crédito MiVivienda. ¿Verdadero o Falso?]]></enunciado>
+			<respuesta idR="0"><![CDATA[VERDADERO]]></respuesta>	
+			<respuesta idR="1"><![CDATA[FALSO]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="60" OK="0">		
+			<enunciado><![CDATA[Uno de los requisitos del nuevo crédito MiVivienda es que el solicitante y su esposo (a) o conviviente legalmente reconocido, no deben contar con una vivienda financiada con recursos del FONAVI, Fondo MiVivienda o Techo Propio, aún cuando ya no sean propietarios de la misma. ¿Verdadero o Falso?]]></enunciado>
+			<respuesta idR="0"><![CDATA[VERDADERO]]></respuesta>	
+			<respuesta idR="1"><![CDATA[FALSO]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="61" OK="2">		
+			<enunciado><![CDATA[¿Cuál es la edad máxima para calificar al nuevo crédito MiVivienda? marca la opción correcta:]]></enunciado>
+			<respuesta idR="0"><![CDATA[80 años]]></respuesta>	
+			<respuesta idR="1"><![CDATA[75 años]]></respuesta>	
+			<respuesta idR="2"><![CDATA[70 años]]></respuesta>	
+			<respuesta idR="3"><![CDATA[65 años]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="62" OK="2">		
+			<enunciado><![CDATA[¿Cuál es el monto del premio al buen pagador del nuevo crédito MiVivienda? Marca la alternativa correcta: ]]></enunciado>
+			<respuesta idR="0"><![CDATA[S/. 15,000 flat]]></respuesta>	
+			<respuesta idR="1"><![CDATA[S/. 13,500 flat]]></respuesta>	
+			<respuesta idR="2"><![CDATA[S/. 12,500 flat]]></respuesta>	
+			<respuesta idR="3"><![CDATA[S/. 10,000 flat]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="63" OK="0">		
+			<enunciado><![CDATA[Respecto al nuevo crédito Mi Vivienda, indica si el siguiente enunciado es ¿Verdadero o Falso? :
+			""No se puede adquirir una vivienda que registre cargas o gravámenes excepto los relacionados a la implementación de servicios públicos"".]]></enunciado>
+			<respuesta idR="0"><![CDATA[VERDADERO]]></respuesta>	
+			<respuesta idR="1"><![CDATA[FALSO]]></respuesta>		
+		</pregunta>	
+			
+		<pregunta id="64" OK="1">		
+			<enunciado><![CDATA[Respecto al nuevo crédito Mi Vivienda, indica si el siguiente enunciado es ¿Verdadero o Falso? 
+		 	La tasa de interés es fija durante los primeros diez años y luego aplica la tasa limabor durante el resto del préstamo.]]></enunciado>
+			<respuesta idR="0"><![CDATA[VERDADERO]]></respuesta>	
+			<respuesta idR="1"><![CDATA[FALSO]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="65" OK="0">		
+			<enunciado><![CDATA[ Respecto al nuevo crédito Mi Vivienda, indica si el siguiente enunciado es ¿Verdadero o Falso? 
+			La forma de aplicación del premio al buen pagador será contemplando 2 cronogramas, uno por Tramo No Concesional y otro por Tramo Concesional.]]></enunciado>
+			<respuesta idR="0"><![CDATA[VERDADERO]]></respuesta>	
+			<respuesta idR="1"><![CDATA[FALSO]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="66" OK="3">		
+			<enunciado><![CDATA[Verifica si es Verdadero (V) o Falso (F) cada una de las siguientes alternativas y marca la opción que tenga la combinación correcta respecto al nuevo Crédito MiVivienda:
+			• El ingreso mínimo es de S/. 1,000 o su equivalente en dólares (titular + cónyuge). 
+			• Financiamiento Máximo: 80% del valor comercial del informe técnico de tasación, o de compra venta (el menor). Máximo (45UIT´s). 
+			• El cliente puede pagar cuotas dobles hasta 2 veces al año en los meses que elija. ]]></enunciado>
+			<respuesta idR="0"><![CDATA[FVV]]></respuesta>	
+			<respuesta idR="1"><![CDATA[VFF]]></respuesta>	
+			<respuesta idR="2"><![CDATA[VVF]]></respuesta>	
+			<respuesta idR="3"><![CDATA[VFV]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="67" OK="2">		
+			<enunciado><![CDATA[Respecto a las características del Financiamiento de Activo Fijo Vía Leasing, marca la alternativa falsa:]]></enunciado>
+			<respuesta idR="0"><![CDATA[Se puede brindar períodos de gracia para los arrendamientos financieros en función a la evaluación crediticia del cliente.]]></respuesta>	
+			<respuesta idR="1"><![CDATA[Las cuotas de pago pueden ser estacionales, decrecientes, crecientes, iguales, etc.]]></respuesta>	
+			<respuesta idR="2"><![CDATA[El monto de financiamiento mínimo para bienes muebles es de US$ 15,000 y para bienes inmuebles es de US$ 70,000]]></respuesta>	
+			<respuesta idR="3"><![CDATA[La cuota se calcula sobre el valor de los activos sin IGV.]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="68" OK="1">		
+			<enunciado><![CDATA[En Leasing, para acceder al beneficio de la depreciación acelerada, el plazo de financiamiento mínimo debe ser:]]></enunciado>
+			<respuesta idR="0"><![CDATA[Para bienes inmobiliarios 2 años y para bienes mobiliarios 5 años.]]></respuesta>	
+			<respuesta idR="1"><![CDATA[Para bienes inmobiliarios 5 años y para bienes mobiliarios 2 años.]]></respuesta>	
+			<respuesta idR="2"><![CDATA[No se goza de este beneficio en ningún caso.]]></respuesta>					
+		</pregunta>		
+
+		<pregunta id="69" OK="1">		
+			<enunciado><![CDATA[En el caso de Leasing, ¿quién es el propietario de los bienes?]]></enunciado>
+			<respuesta idR="0"><![CDATA[Legalmente: El Banco pero para Efectos del Impuesto a la Renta: El proveedor]]></respuesta>	
+			<respuesta idR="1"><![CDATA[Legalmente: El Banco pero para Efectos del Impuesto a la Renta: El cliente]]></respuesta>	
+			<respuesta idR="2"><![CDATA[Legalmente: El cliente pero para Efectos del Impuesto a la Renta: El Banco]]></respuesta>					
+		</pregunta>	
+			
+		<pregunta id="70" OK="1">		
+			<enunciado><![CDATA[Respecto al Leasing ¿Cuál de los siguientes enunciados es FALSO?]]></enunciado>
+			<respuesta idR="0"><![CDATA[Un cliente puede endosar sus pólizas de seguro a favor del banco. ]]></respuesta>	
+			<respuesta idR="1"><![CDATA[El pago se realiza en cuotas de alquiler que no incluyen el IGV en cada factura generada ya que este es cancelado en el desembolso]]></respuesta>	
+			<respuesta idR="2"><![CDATA[Si se presenta un problema en la entrega del bien, el banco delega al cliente las facultades para que reclame por el inconveniente]]></respuesta>	
+			<respuesta idR="3"><![CDATA[La depreciación acelerada repercute en una menor base sobre la cual se calcula el impuesto a la renta anual de la empresa.]]></respuesta>	
+		</pregunta>		
+
+		<pregunta id="71" OK="1">		
+			<enunciado><![CDATA[Sobre el Leasing o arrendamiento financiero ¿Cuál de los siguientes enunciados es FALSO?]]></enunciado>
+			<respuesta idR="0"><![CDATA[Permite usar depreciación acelerada generada por uso de activos fijos influyendo la base de cálculo para impuesto a la renta anual]]></respuesta>	
+			<respuesta idR="1"><![CDATA[Financia hasta 80% del bien incluido instalación, puesta en marcha, gastos importación, internamiento, si se sustenta con facturas]]></respuesta>	
+			<respuesta idR="2"><![CDATA[Se puede hacer arrendamiento financiero de bienes usados.]]></respuesta>					
+		</pregunta>	
+			
+		<pregunta id="72" OK="2">		
+			<enunciado><![CDATA[¿Qué modalidad de leasing es aquella en la que una empresa vende un activo de su propiedad al Banco para que éste se lo arriende, otorgándole a la empresa Liquidez Inmediata?]]></enunciado>
+			<respuesta idR="0"><![CDATA[Leasing de maquinaria y equipos.]]></respuesta>	
+			<respuesta idR="1"><![CDATA[Leasing de construcción.]]></respuesta>	
+			<respuesta idR="2"><![CDATA[Leaseback]]></respuesta>					
+		</pregunta>	 -->	
+
+	</preguntas>
+</juego>
