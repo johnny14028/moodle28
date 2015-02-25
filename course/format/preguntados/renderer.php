@@ -119,18 +119,7 @@ class format_preguntados_renderer extends format_section_renderer_base {
     
     public function getSwf(){
         $html = '';
-        $html.='<object id="preloader" align="middle" width="1100" height="700" type="application/x-shockwave-flash" name="preloader" data="assets/index.swf">
-<param name="quality" value="high">
-<param name="bgcolor" value="#fff">
-<param name="play" value="true">
-<param name="loop" value="true">
-<param name="wmode" value="opaque">
-<param name="scale" value="showall">
-<param name="menu" value="true">
-<param name="devicefont" value="false">
-<param name="salign" value="">
-<param name="allowscriptaccess" value="sameDomain">
-</object>';
+        $html.='<iframe frameborder="0" width="1200" height="800" src="format/preguntados/assets/index.html"></iframe>';
         return $html;
     }
 }
