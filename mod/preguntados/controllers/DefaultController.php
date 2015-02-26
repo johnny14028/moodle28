@@ -52,7 +52,19 @@ class DefaultController extends mvc_command_Command {
     
     public function getInit(){
         global $USER;
-        
-        echo json_encode($USER);
+        $returnValue = array();
+        $returnValue['Validacion'] ='';
+        $returnValue['Token'] =md5(uniqid(rand(), true));
+        $returnValue['idCurso'] =$_SESSION['course_preguntados'];
+        $returnValue['idUsuario'] =$USER->id;
+        $returnValue['idGrupo'] =$this->getIdGroup();
+        $returnValue['retos'] ='';
+        echo json_encode($returnValue);
+    }
+    
+    private function getIdGroup(){
+        global $USER, $DB;
+        $objGroupMember = $DB->get_record('groups_members', array('userid'=>$USER->id));
+        return $objGroupMember->groupid;
     }
 }

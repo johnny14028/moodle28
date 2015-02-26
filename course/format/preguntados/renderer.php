@@ -117,9 +117,14 @@ class format_preguntados_renderer extends format_section_renderer_base {
         return array_merge($controls, parent::section_edit_controls($course, $section, $onsectionpage));
     }
     
-    public function getSwf(){
+    public function getSwf($course){
+        $this->saveCourseSession($course->id);
         $html = '';
-        $html.='<iframe frameborder="0" width="1200" height="800" src="format/preguntados/assets/index.html"></iframe>';
+        $html.='<iframe frameborder="0" width="1200" height="800" src="format/preguntados/assets/index.php?course='.$course->id.'"></iframe>';
         return $html;
+    }
+    
+    protected function saveCourseSession($courseid){
+        $_SESSION['course_preguntados'] = $courseid;
     }
 }
